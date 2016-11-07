@@ -14,7 +14,7 @@
 1. **Service Discovery** 
 2. **BoundedContext **
 3. **ResilienceAPI** 
-4. **API Gateway
+4. **API Gateway**
 5. **Monitoring**
 6. **Feature Flags** 
 7. **CQRS**
