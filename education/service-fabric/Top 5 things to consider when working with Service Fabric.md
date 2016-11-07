@@ -12,7 +12,7 @@
 
 ## General familiarity with common Design Patterns used in Microservices is also very helpful
 1. **Service Discovery** 
-2. **BoundedContext **
+2. **BoundedContext**
 3. **ResilienceAPI** 
 4. **API Gateway**
 5. **Monitoring**
