@@ -38,8 +38,8 @@
 
 ## With Microservices development, it is implied that the system may become more complex as services are distributed. Recognize complexity of a distributed system. This also means that there will be operational complexities that need to be addressed. One needs a mature DevOps team to manage lots of services that are being deployed and redeployed regularly. I have found the following helpful with that respect:
 1. Enable the Diagnostics extensions for the VMs to be provisioned on the Service Fabric Cluster. This can be done via automation using an ARM template, PowerShell, or Xplat-CLI. The portal allows to turn on the Diagnostics extensions as well if creating the Service Fabric Cluster via the portal.
-2. You can use Elasticsearch which is an open-source full-text search and analytics engine.  This will help you in storing, searching, and analyzing large volumes of data in real time. You can also send Service Fabric Logs to Elastic Search and host a highly available Elasticsearch deployment on Azure - https://www.elastic.co/guide/index.html
-3. In addition, you can use Kibana to display data indexed by Elasticsearch - https://www.elastic.co/products/kibana
+2. You can use Elasticsearch which is an open-source full-text search and analytics engine.  This will help you in storing, searching, and analyzing large volumes of data in real time. You can also send Service Fabric Logs to Elastic Search and host a highly available [Elasticsearch deployment](https://www.elastic.co/guide/index.html) on Azure.
+3. In addition, you can use [Kibana](https://www.elastic.co/products/kibana) to display data indexed by Elasticsearch.
 4. Of course, you can rely on the Service Fabric Explorer to track health of the cluster and services and get basic diagnostics information.
 
 
