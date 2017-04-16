@@ -1,0 +1,8 @@
+/Users/Razi/Desktop/microservices/Demos/mywebapi/bin/Debug/netcoreapp1.1/mywebapi.deps.json
+/Users/Razi/Desktop/microservices/Demos/mywebapi/bin/Debug/netcoreapp1.1/mywebapi.runtimeconfig.json
+/Users/Razi/Desktop/microservices/Demos/mywebapi/bin/Debug/netcoreapp1.1/mywebapi.runtimeconfig.dev.json
+/Users/Razi/Desktop/microservices/Demos/mywebapi/bin/Debug/netcoreapp1.1/mywebapi.dll
+/Users/Razi/Desktop/microservices/Demos/mywebapi/bin/Debug/netcoreapp1.1/mywebapi.pdb
+/Users/Razi/Desktop/microservices/Demos/mywebapi/obj/Debug/netcoreapp1.1/mywebapi.AssemblyInfo.cs
+/Users/Razi/Desktop/microservices/Demos/mywebapi/obj/Debug/netcoreapp1.1/mywebapi.dll
+/Users/Razi/Desktop/microservices/Demos/mywebapi/obj/Debug/netcoreapp1.1/mywebapi.pdb

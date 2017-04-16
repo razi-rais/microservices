@@ -1,0 +1,13 @@
+version : '2'
+
+services:
+  demowebapp:
+    image: rzdockerregistry.azurecr.io/demo-webapp 
+    ports:
+      - 80:80
+    depends_on:
+      - demowebapi
+  demowebapi:
+    image: rzdockerregistry.azurecr.io/demo-webapi
+    ports:
+      - 9000:9000
