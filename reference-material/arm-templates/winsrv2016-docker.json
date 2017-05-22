@@ -1,0 +1,287 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_rz_win2k16_cont_name": {
+            "defaultValue": "rz-win2k16-11",
+            "type": "String"
+        },
+        "networkInterfaces_rz_win2k16_cont545_name": {
+            "defaultValue": "rz-win2k16-cont549",
+            "type": "String"
+        },
+        "networkSecurityGroups_rz_win2k16_cont_nsg_name": {
+            "defaultValue": "rz-win2k16-cot-nsg",
+            "type": "String"
+        },
+        "publicIPAddresses_rz_win2k16_cont_ip_name": {
+            "defaultValue": "rz-win2k16-cot-ip",
+            "type": "String"
+        },
+        "dnsPrefixString": {
+            "type": "string",
+            "maxLength": 50,
+            "metadata": {
+            "description": "The DNS label for the public IP address. It must be lowercase. It should match the following regular expression, or it will raise an error: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$"
+            }
+        },
+        "virtualNetworks_rz_win2k16_lab_rg_vnet_name": {
+            "defaultValue": "rz-win2k16-lab-rg-vnet",
+            "type": "String"
+        },
+        "storageAccounts_rzwin2k16labrgdisks146_name": {
+            "defaultValue": "rzwin2k16labrgdisks14612",
+            "type": "String"
+        },
+        "publisher": {
+            "defaultValue": "MicrosoftWindowsServer",
+            "type": "String"
+        },
+        "offer": {
+            "defaultValue": "WindowsServer",
+            "type": "String"
+        },
+         "sku": {
+            "defaultValue": "2016-Datacenter-with-Containers",
+            "type": "String"
+        },
+        "adminUsername": {
+            "type": "String",
+            "metadata": {
+                "description": "Admin username"
+            }
+        },
+        "adminPassword": {
+            "type": "SecureString",
+            "metadata": {
+                "description": "Admin password (must be a strong password as required by Windows)"
+            }
+        }
+    },
+    "variables": {
+        "dnsPrefix": "[concat(parameters('dnsPrefixString'),uniquestring(resourceGroup().id))]",
+        "storageAccountDiagnostics": "[concat(uniqueString(resourceGroup().id),'diag')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_rz_win2k16_cont_name')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "eastus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('publisher')]",
+                        "offer": "[parameters('offer')]",
+                        "sku": "[parameters('sku')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[parameters('virtualMachines_rz_win2k16_cont_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_rzwin2k16labrgdisks146_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_rz_win2k16_cont_name'),'20170212095102.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_rz_win2k16_cont_name')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rz_win2k16_cont545_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true,
+                        "storageUri": "[concat('https', '://', variables('storageAccountDiagnostics'), '.blob.core.windows.net', '/')]"
+                    }
+                }
+            },
+            "resources": [
+                {
+                    "type": "extensions",
+                    "name": "installdocker",
+                    "apiVersion": "2016-03-30",
+                    "location": "eastus",
+                    "tags": {
+                        "displayName": "installdocker"
+                    },
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.4",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "https://raw.githubusercontent.com/razi-rais/microservices/master/reference-material/installdocker.ps1"
+                            ],
+                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-Module -Name DockerMsftProvider -Repository PSGallery -Force; powershell -ExecutionPolicy Unrestricted Install-Package -Name docker -ProviderName DockerMsftProvider -Force; Invoke-WebRequest 'https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Windows-x86_64.exe' -UseBasicParsing -OutFile $Env:ProgramFiles\\docker\\docker-compose.exe; Restart-Computer -Force"
+                        }
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_rz_win2k16_cont_name'))]"
+                    ]
+                }
+            ],
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_rzwin2k16labrgdisks146_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rz_win2k16_cont545_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountDiagnostics'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_rz_win2k16_cont545_name')]",
+            "apiVersion": "2017-03-01",
+            "location": "eastus",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_rz_win2k16_cont_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_rz_win2k16_lab_rg_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_rz_win2k16_cont_nsg_name'))]"
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_rz_win2k16_cont_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_rz_win2k16_lab_rg_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_rz_win2k16_cont_nsg_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_rz_win2k16_cont_nsg_name')]",
+            "apiVersion": "2017-03-01",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-rdp",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "ALL_PORTS_NOT_FOR_PROD",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1010,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_rz_win2k16_cont_ip_name')]",
+            "apiVersion": "2017-03-01",
+            "location": "eastus",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "[variables('dnsPrefix')]"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_rz_win2k16_lab_rg_vnet_name')]",
+            "apiVersion": "2017-03-01",
+            "location": "eastus",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": []
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[variables('storageAccountDiagnostics')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_rzwin2k16labrgdisks146_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        }
+    ]
+}
