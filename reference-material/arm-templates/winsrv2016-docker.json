@@ -132,7 +132,7 @@
                             "fileUris": [
                                 "https://raw.githubusercontent.com/razi-rais/microservices/master/reference-material/installdocker.ps1"
                             ],
-                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-Module -Name DockerMsftProvider -Repository PSGallery -Force; powershell -ExecutionPolicy Unrestricted Install-Package -Name docker -ProviderName DockerMsftProvider -Force; Invoke-WebRequest 'https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Windows-x86_64.exe' -UseBasicParsing -OutFile $Env:ProgramFiles\\docker\\docker-compose.exe; Restart-Computer -Force"
+                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force; powershell -ExecutionPolicy Unrestricted Install-Module -Name DockerMsftProvider -Repository PSGallery -Force; powershell -ExecutionPolicy Unrestricted Install-Package -Name docker -ProviderName DockerMsftProvider -Force; Invoke-WebRequest 'https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Windows-x86_64.exe' -UseBasicParsing -OutFile $Env:ProgramFiles\\docker\\docker-compose.exe; Restart-Computer -Force"
                         }
                     },
                     "dependsOn": [
