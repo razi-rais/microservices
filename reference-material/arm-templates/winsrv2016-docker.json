@@ -42,7 +42,7 @@
             "type": "String"
         },
          "sku": {
-            "defaultValue": "2016-Datacenter-with-Containers",
+            "defaultValue": "2016-Datacenter",
             "type": "String"
         },
         "adminUsername": {
