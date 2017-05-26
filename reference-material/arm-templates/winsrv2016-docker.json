@@ -2,11 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachineName": {
-            "defaultValue": "rz-win2k16-11",
-            "type": "String"
-        },
-        "networkInterfaceName": {
+      "networkInterfaceName": {
             "defaultValue": "rz-win2k16-cont549",
             "type": "String"
         },
@@ -60,13 +56,14 @@
         }
     },
     "variables": {
+        "vmName": "[uniqueString(resourceGroup().id,deployment().name)]",
         "dnsPrefix": "[concat(parameters('dnsPrefixString'),uniquestring(resourceGroup().id))]",
         "storageAccountDiagnostics": "[concat(uniqueString(resourceGroup().id),'diag')]"
     },
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[parameters('virtualMachineName')]",
+            "name": "[variables('vmName')]",
             "apiVersion": "2016-04-30-preview",
             "location": "eastus",
             "properties": {
@@ -82,17 +79,17 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[parameters('virtualMachineName')]",
+                        "name": "[variables('vmName')]",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https', '://', parameters('storageAccountName'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachineName'),'20170212095102.vhd'))]"
+                            "uri": "[concat('https', '://', parameters('storageAccountName'), '.blob.core.windows.net', concat('/vhds/', variables('vmName'),'20170212095102.vhd'))]"
                         },
                         "caching": "ReadWrite"
                     },
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachineName')]",
+                    "computerName": "[variables('vmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
@@ -137,7 +134,7 @@
                         }
                     },
                     "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachineName'))]"
+                        "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
                     ]
                 }
             ],
