@@ -2,34 +2,35 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_rz_win2k16_cont_name": {
+        "virtualMachineName": {
             "defaultValue": "rz-win2k16-11",
             "type": "String"
         },
-        "networkInterfaces_rz_win2k16_cont545_name": {
+        "networkInterfaceName": {
             "defaultValue": "rz-win2k16-cont549",
             "type": "String"
         },
-        "networkSecurityGroups_rz_win2k16_cont_nsg_name": {
+        "networkSecurityGroupName": {
             "defaultValue": "rz-win2k16-cot-nsg",
             "type": "String"
         },
-        "publicIPAddresses_rz_win2k16_cont_ip_name": {
+        "publicIPAddressName": {
             "defaultValue": "rz-win2k16-cot-ip",
             "type": "String"
         },
         "dnsPrefixString": {
+            "defaultValue": "rz",
             "type": "string",
             "maxLength": 50,
             "metadata": {
             "description": "The DNS label for the public IP address. It must be lowercase. It should match the following regular expression, or it will raise an error: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$"
             }
         },
-        "virtualNetworks_rz_win2k16_lab_rg_vnet_name": {
+        "virtualNetworkName": {
             "defaultValue": "rz-win2k16-lab-rg-vnet",
             "type": "String"
         },
-        "storageAccounts_rzwin2k16labrgdisks146_name": {
+        "storageAccountName": {
             "defaultValue": "rzwin2k16labrgdisks14612",
             "type": "String"
         },
@@ -65,7 +66,7 @@
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[parameters('virtualMachines_rz_win2k16_cont_name')]",
+            "name": "[parameters('virtualMachineName')]",
             "apiVersion": "2016-04-30-preview",
             "location": "eastus",
             "properties": {
@@ -81,17 +82,17 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[parameters('virtualMachines_rz_win2k16_cont_name')]",
+                        "name": "[parameters('virtualMachineName')]",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https', '://', parameters('storageAccounts_rzwin2k16labrgdisks146_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_rz_win2k16_cont_name'),'20170212095102.vhd'))]"
+                            "uri": "[concat('https', '://', parameters('storageAccountName'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachineName'),'20170212095102.vhd'))]"
                         },
                         "caching": "ReadWrite"
                     },
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_rz_win2k16_cont_name')]",
+                    "computerName": "[parameters('virtualMachineName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
@@ -103,7 +104,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rz_win2k16_cont545_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
                         }
                     ]
                 },
@@ -136,19 +137,19 @@
                         }
                     },
                     "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_rz_win2k16_cont_name'))]"
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachineName'))]"
                     ]
                 }
             ],
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_rzwin2k16labrgdisks146_name'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_rz_win2k16_cont545_name'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]",
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountDiagnostics'))]"
             ]
         },
         {
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[parameters('networkInterfaces_rz_win2k16_cont545_name')]",
+            "name": "[parameters('networkInterfaceName')]",
             "apiVersion": "2017-03-01",
             "location": "eastus",
             "properties": {
@@ -159,10 +160,10 @@
                             "privateIPAddress": "10.0.0.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_rz_win2k16_cont_ip_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
                             },
                             "subnet": {
-                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_rz_win2k16_lab_rg_vnet_name')), '/subnets/default')]"
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName')), '/subnets/default')]"
                             }
                         }
                     }
@@ -172,18 +173,18 @@
                 },
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_rz_win2k16_cont_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
                 }
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_rz_win2k16_cont_ip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_rz_win2k16_lab_rg_vnet_name'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_rz_win2k16_cont_nsg_name'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
             ]
         },
         {
             "type": "Microsoft.Network/networkSecurityGroups",
-            "name": "[parameters('networkSecurityGroups_rz_win2k16_cont_nsg_name')]",
+            "name": "[parameters('networkSecurityGroupName')]",
             "apiVersion": "2017-03-01",
             "location": "eastus",
             "properties": {
@@ -220,7 +221,7 @@
         },
         {
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[parameters('publicIPAddresses_rz_win2k16_cont_ip_name')]",
+            "name": "[parameters('publicIPAddressName')]",
             "apiVersion": "2017-03-01",
             "location": "eastus",
             "properties": {
@@ -234,7 +235,7 @@
         },
         {
             "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetworks_rz_win2k16_lab_rg_vnet_name')]",
+            "name": "[parameters('virtualNetworkName')]",
             "apiVersion": "2017-03-01",
             "location": "eastus",
             "properties": {
@@ -276,7 +277,7 @@
                 "tier": "Premium"
             },
             "kind": "Storage",
-            "name": "[parameters('storageAccounts_rzwin2k16labrgdisks146_name')]",
+            "name": "[parameters('storageAccountName')]",
             "apiVersion": "2016-01-01",
             "location": "eastus",
             "tags": {},
