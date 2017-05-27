@@ -11,10 +11,10 @@ sudo chmod +x $PWD/install-nodejs.sh
 sudo chmod +x $PWD/install-yeoman.sh
 sudo chmod +x $PWD/install-dotnetcore.sh
 
-$PWD/install-docker.sh 
-$PWD/install-nodejs.sh
-$PWD/install-yeoman.sh 
-$PWD/install-dotnetcore.sh
+./install-docker.sh 
+./install-nodejs.sh
+./install-yeoman.sh 
+./install-dotnetcore.sh
 
 
 
