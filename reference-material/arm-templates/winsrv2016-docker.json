@@ -17,11 +17,11 @@
     },
     "variables": {
         "vmName": "[uniqueString(resourceGroup().id,deployment().name)]",
-        "networkInterfaceName" : "[uniqueString(resourceGroup().id,deployment().name)]",
-        "networkSecurityGroupName" : "[uniqueString(resourceGroup().id,deployment().name)]",
-        "publicIPAddressName" : "[uniqueString(resourceGroup().id,deployment().name)]",
-        "virtualNetworkName" : "[uniqueString(resourceGroup().id,deployment().name)]",
-        "storageAccountName" : "[uniqueString(resourceGroup().id,deployment().name)]",
+        "networkInterfaceName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-nic')]",
+        "networkSecurityGroupName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-nsg')]",
+        "publicIPAddressName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-public')]",
+        "virtualNetworkName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-vnet')]",
+        "storageAccountName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'vhds')]",
         "publisher" : "MicrosoftWindowsServer",
         "offer" : "WindowsServer",
         "sku" : "2016-Datacenter",
@@ -249,5 +249,19 @@
             "properties": {},
             "dependsOn": []
         }
-    ]
+    ],
+     "outputs": {
+            "VirtualMachineName": {
+            "type": "String",
+            "value": "[reference(resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))).osProfile.computerName]"
+            }, 
+            "FDQN": {
+            "type": "String",
+            "value": "[concat('http://',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)]"
+            },
+            "RDP": {
+            "type": "String",
+            "value": "[concat(concat('mstsc /V:',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn),':3389')]"
+            }
+        }
 }
