@@ -19,7 +19,7 @@ sudo apt-get update
 sudo apt-get -y install docker-engine
 
 #update permissions to allow current user run docker commands without sudo
-sudo gpasswd -a $USER docker
+awk -F':' '{ sudo gpasswd -a $1 docker ; print $1 }' /etc/passwd
 
 sudo service docker restart
 
