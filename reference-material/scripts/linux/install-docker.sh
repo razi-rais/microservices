@@ -1,4 +1,4 @@
-#prepare & install docker engine
+#prepare & install docker engine (https://docs.docker.com/compose/install)
 sudo apt-get install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
@@ -24,5 +24,15 @@ sudo gpasswd -a $USER docker
 sudo service docker restart
 
 sudo systemctl docker restart
+
+
+#install docker-compose
+#version needs to be updated with every major release of docker-compose 
+
+sudo -i 
+
+curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
 
 exit
