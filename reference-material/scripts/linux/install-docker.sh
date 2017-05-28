@@ -20,11 +20,10 @@ sudo apt-get -y install docker-engine
 
 #update permissions to allow current user run docker commands without sudo
 #awk -F':' '{ sudo gpasswd -a $1 docker ; print $1 }' /etc/passwd
-sudo chmod 777 /var/run/docker.sock
-
+sudo gpasswd -a $USER docker
 sudo service docker restart
-
-sudo systemctl docker restart
+sudo chmod 777 /var/run/docker.sock
+#sudo systemctl docker restart
 
 
 #install docker-compose
