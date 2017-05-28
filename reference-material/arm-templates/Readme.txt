@@ -1,6 +1,6 @@
 Use the following link to land on Azure Portal with Ubuntu 16.04 LTS + Docker (including Compose) template pre-populated.
 
-https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2razi-rais%2microservices%2master%2reference-material%2arm-templates%2ubuntu-1604LTS-docker.json
+https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2master%2Freference-material%2arm-templates%2Fubuntu-1604LTS-docker.json
 
 Use the following link to land on Azure Portal with Windows Server 2016 + Docker (including Compose) template pre-populated.
 
