@@ -5,4 +5,4 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 
 sudo apt-get update
 
-sudo apt-get -y install dotnet-dev-1.0.0-preview2.1-003177
+sudo apt-get install dotnet-dev-1.0.4
