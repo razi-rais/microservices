@@ -13,7 +13,24 @@
             "metadata": {
                 "description": "Admin password (must be a strong password as required by Windows)"
             }
-        }
+        },
+        "vmSize": {
+      "type": "string",
+       "defaultValue": "Standard_DS2_v2",
+      "allowedValues": [
+        "Standard_DS2_v2",
+        "Standard_DS3_v2",
+        "Standard_D2_v2",
+        "Standard_D3_v2",
+        "Standard_DS2",
+        "Standard_DS3",
+        "Standard_D2",
+        "Standard_D14"
+      ],
+      "metadata": {
+        "description": "Size of vm"
+      }
+     }
     },
     "variables": {
         "vmName": "[uniqueString(resourceGroup().id,deployment().name)]",
@@ -36,7 +53,7 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_DS1_v2"
+                    "vmSize": "[parameters('vmSize')]"
                 },
                 "storageProfile": {
                     "imageReference": {
