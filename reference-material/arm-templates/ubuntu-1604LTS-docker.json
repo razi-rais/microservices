@@ -203,5 +203,19 @@
         }
       }
     }
-  ]
+  ],
+    "outputs": {
+            "VirtualMachineName": {
+            "type": "String",
+            "value": "[reference(resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))).osProfile.computerName]"
+            }, 
+            "FDQN": {
+            "type": "String",
+            "value": "[concat('http://',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)]"
+            },
+            "SSH": {
+            "type": "String",
+            "value": "[concat('ssh ', concat(parameters('username'),reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn))]"
+            }
+        }
 }
