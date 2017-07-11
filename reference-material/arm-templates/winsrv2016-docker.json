@@ -33,7 +33,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[variables('vmName')]",
             "apiVersion": "2016-04-30-preview",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "Standard_DS1_v2"
@@ -85,7 +85,7 @@
                     "type": "extensions",
                     "name": "installdocker",
                     "apiVersion": "2016-03-30",
-                    "location": "eastus",
+                    "location": "[resourceGroup().location]",
                     "tags": {
                         "displayName": "installdocker"
                     },
@@ -116,7 +116,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "name": "[variables('networkInterfaceName')]",
             "apiVersion": "2017-03-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "ipConfigurations": [
                     {
@@ -151,7 +151,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[variables('networkSecurityGroupName')]",
             "apiVersion": "2017-03-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
                     {
@@ -188,7 +188,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "name": "[variables('publicIPAddressName')]",
             "apiVersion": "2017-03-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -202,7 +202,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "name": "[variables('virtualNetworkName')]",
             "apiVersion": "2017-03-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -230,7 +230,7 @@
             "kind": "Storage",
             "name": "[variables('storageAccountDiagnostics')]",
             "apiVersion": "2016-01-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {},
             "dependsOn": []
@@ -244,7 +244,7 @@
             "kind": "Storage",
             "name": "[variables('storageAccountName')]",
             "apiVersion": "2016-01-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {},
             "dependsOn": []
