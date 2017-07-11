@@ -215,7 +215,7 @@
             },
             "SSH": {
             "type": "String",
-            "value": "[concat('ssh ', concat(parameters('username'),reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn))]"
+            "value": "[concat('ssh ', concat(parameters('username'),concat('@',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)))]"
             }
         }
 }
