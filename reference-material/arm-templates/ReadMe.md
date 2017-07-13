@@ -17,7 +17,7 @@ Azure ARM template that creates Azure Linux VM with following software installed
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-After the virtual machine is created and running use the following command to find out versions of all the installed software:
+After the virtual machine is created and running use the following command to find out versions of all of the installed software:
 
 ```
 echo 'nodejs version ' $(node -v)  && echo 'npm version ' $(npm -v)  &&  echo 'dotnet version ' $(dotnet --version) && $(git --version) && az --version && printf "docker Client & Server version \n $(docker version)" 
