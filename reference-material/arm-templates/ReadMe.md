@@ -2,6 +2,7 @@
 
 Azure ARM template that creates Azure Linux VM with following software installed:
 
+* Ubuntu Server 16.04 LTS
 * docker (includes docker engine, client and docker compose)
 * git
 * nodejs
