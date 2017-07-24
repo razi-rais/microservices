@@ -13,24 +13,7 @@
             "metadata": {
                 "description": "Admin password (must be a strong password as required by Windows)"
             }
-        },
-        "vmSize": {
-      "type": "string",
-       "defaultValue": "Standard_DS2_v2",
-      "allowedValues": [
-        "Standard_DS2_v2",
-        "Standard_DS3_v2",
-        "Standard_D2_v2",
-        "Standard_D3_v2",
-        "Standard_DS2",
-        "Standard_DS3",
-        "Standard_D2",
-        "Standard_D14"
-      ],
-      "metadata": {
-        "description": "Size of vm"
-      }
-     }
+        }
     },
     "variables": {
         "vmName": "[uniqueString(resourceGroup().id,deployment().name)]",
@@ -39,9 +22,9 @@
         "publicIPAddressName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-public')]",
         "virtualNetworkName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-vnet')]",
         "storageAccountName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'vhds')]",
-        "publisher" : "MicrosoftVisualStudio",
-        "offer" : "VisualStudio",
-        "sku" : "VS-2017-Comm-v152-WS2016",
+        "publisher" : "MicrosoftWindowsServer",
+        "offer" : "WindowsServer",
+        "sku" : "2016-Datacenter",
         "dnsPrefix": "[concat('lab',uniqueString(resourceGroup().id,deployment().name))]",
         "storageAccountDiagnostics": "[concat(uniqueString(resourceGroup().id),'diag')]"
     },
@@ -53,7 +36,7 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('vmSize')]"
+                    "vmSize": "Standard_D2s_v3"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -112,11 +95,8 @@
                         "typeHandlerVersion": "1.4",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "fileUris": [
-                                "https://raw.githubusercontent.com/razi-rais/microservices/master/reference-material/installdocker.ps1"
-                            ],
-                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force; powershell -ExecutionPolicy Unrestricted Install-Module -Name DockerMsftProvider -Repository PSGallery -Force; powershell -ExecutionPolicy Unrestricted Install-Package -Name docker -ProviderName DockerMsftProvider -Force; Invoke-WebRequest 'https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Windows-x86_64.exe' -UseBasicParsing -OutFile $Env:ProgramFiles\\docker\\docker-compose.exe; Restart-Computer -Force"
-                        }
+
+                            "commandToExecute": "powershell Set-ExecutionPolicy Bypass -Force ; powershell -Command 'iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''))'  ; powershell C:\\ProgramData\\chocolatey\\choco install -y putty ; powershell C:\\ProgramData\\chocolatey\\choco install -y nodejs.install; powershell C:\\ProgramData\\chocolatey\\choco install -y azure-cli; powershell C:\\ProgramData\\chocolatey\\choco install -y sql-server-management-studio; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudiocode;"  }
                     },
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
