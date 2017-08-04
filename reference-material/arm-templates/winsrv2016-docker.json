@@ -17,14 +17,14 @@
     },
     "variables": {
         "vmName": "[uniqueString(resourceGroup().id,deployment().name)]",
-        "networkInterfaceName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-nic')]",
-        "networkSecurityGroupName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-nsg')]",
-        "publicIPAddressName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-public')]",
-        "virtualNetworkName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'-vnet')]",
-        "storageAccountName" : "[concat(uniqueString(resourceGroup().id,deployment().name),'vhds')]",
-        "publisher" : "MicrosoftWindowsServer",
-        "offer" : "WindowsServer",
-        "sku" : "2016-Datacenter",
+        "networkInterfaceName": "[concat(uniqueString(resourceGroup().id,deployment().name),'-nic')]",
+        "networkSecurityGroupName": "[concat(uniqueString(resourceGroup().id,deployment().name),'-nsg')]",
+        "publicIPAddressName": "[concat(uniqueString(resourceGroup().id,deployment().name),'-public')]",
+        "virtualNetworkName": "[concat(uniqueString(resourceGroup().id,deployment().name),'-vnet')]",
+        "storageAccountName": "[concat(uniqueString(resourceGroup().id,deployment().name),'vhds')]",
+        "publisher": "MicrosoftWindowsServer",
+        "offer": "WindowsServer",
+        "sku": "2016-Datacenter",
         "dnsPrefix": "[concat('lab',uniqueString(resourceGroup().id,deployment().name))]",
         "storageAccountDiagnostics": "[concat(uniqueString(resourceGroup().id),'diag')]"
     },
@@ -36,7 +36,7 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_DS1_v2"
+                    "vmSize": "Standard_DS2_v2"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -95,10 +95,7 @@
                         "typeHandlerVersion": "1.4",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "fileUris": [
-                                "https://raw.githubusercontent.com/razi-rais/microservices/master/reference-material/installdocker.ps1"
-                            ],
-                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force; powershell -ExecutionPolicy Unrestricted Install-Module -Name DockerMsftProvider -Repository PSGallery -Force; powershell -ExecutionPolicy Unrestricted Install-Package -Name docker -ProviderName DockerMsftProvider -Force; Invoke-WebRequest 'https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Windows-x86_64.exe' -UseBasicParsing -OutFile $Env:ProgramFiles\\docker\\docker-compose.exe; Restart-Computer -Force"
+                            "commandToExecute": "powershell Set-ExecutionPolicy Bypass -Force ; powershell -Command 'iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''))'  ; powershell C:\\ProgramData\\chocolatey\\choco install -y putty ; powershell C:\\ProgramData\\chocolatey\\choco install -y nodejs.install; powershell C:\\ProgramData\\chocolatey\\choco install -y azure-cli; powershell C:\\ProgramData\\chocolatey\\choco install -y sql-server-management-studio; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudiocode; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017community ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-netcoretools ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-node –y ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-azure ; powershell -ExecutionPolicy Unrestricted Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force; powershell -ExecutionPolicy Unrestricted Install-Module -Name DockerMsftProvider -Repository PSGallery -Force; powershell -ExecutionPolicy Unrestricted Install-Package -Name docker -ProviderName DockerMsftProvider -Force; Invoke-WebRequest 'https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Windows-x86_64.exe' -UseBasicParsing -OutFile $Env:ProgramFiles\\docker\\docker-compose.exe ; Restart-Computer -Force"
                         }
                     },
                     "dependsOn": [
@@ -250,18 +247,18 @@
             "dependsOn": []
         }
     ],
-     "outputs": {
-            "VirtualMachineName": {
+    "outputs": {
+        "VirtualMachineName": {
             "type": "String",
             "value": "[reference(resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))).osProfile.computerName]"
-            }, 
-            "FDQN": {
+        },
+        "FDQN": {
             "type": "String",
             "value": "[concat('http://',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)]"
-            },
-            "RDP": {
+        },
+        "RDP": {
             "type": "String",
             "value": "[concat(concat('mstsc /V:',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn),':3389')]"
-            }
         }
+    }
 }
