@@ -30,7 +30,7 @@ echo 'nodejs version ' $(node -v)  && echo 'npm version ' $(npm -v)  &&  echo 'd
 Azure ARM template that creates Azure Windows Server 2016 VM with following software installed:
 
 * Windows Server 2016
-* Windows Containers - Docker Engine and Docker Compose (NOTE: This template only install native Windows containers and does not support Docker Linux containers. If you need Docker   Linux containers use the ARM template below that install Docker for Windows - it does require nested virtualization)
+* Windows Containers - Docker Engine and Docker Compose (NOTE: This template does not support Docker Linux containers running on Windows Server 2016. If you need both Docker Linux containers and Windows Containers use the ARM template below that install Docker for Windows - it does require nested virtualization)
 * Chocolatey
 * Putty
 * Node 
