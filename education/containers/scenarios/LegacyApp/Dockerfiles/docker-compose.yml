@@ -1,0 +1,16 @@
+version: '2.1'
+services:
+  database:
+    image: sqldatabase
+    ports:
+      - "1433:1433"
+  frontend:
+    image: legacyapp
+    depends_on:
+      - "database"
+    ports:
+      - "80:80"
+networks:
+  default:
+    external:
+      name: nat
