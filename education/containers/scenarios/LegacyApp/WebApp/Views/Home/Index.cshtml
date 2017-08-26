@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Historic Events";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Renaissance</h2>
+        <ul>
+            <li>@Html.ActionLink("The Renaissance was a period in European history, from the 14th to the 17th century, regarded as the cultural bridge between the Middle Ages and modern history.", "Renaissance", "Home")
+           </li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>French Revolution</h2>
+        <ul>
+            <li>
+                @Html.ActionLink("The French Revolution was a period of far-reaching social and political upheaval in France that lasted from 1789 until 1799, and was partially carried forward by Napoleon during the later expansion of the French Empire.", "FrenchRevolution", "Home")
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>World War I</h2>
+        <ul>
+            <li>
+                @Html.ActionLink("World War I, also known as the First World War, the Great War, or the War to End All Wars, was a global war originating in Europe that lasted from 28 July 1914 to 11 November 1918. More than 70 million military personnel, including 60 million Europeans, were mobilised in one of the largest wars in history.", "WW1", "Home")
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>World War II</h2>
+        <ul>
+            <li>
+                @Html.ActionLink("World War II, also known as the Second World War, was a global war that lasted from 1939 to 1945, although related conflicts began earlier. It involved the vast majority of the world's countries—including all of the great powers—eventually forming two opposing military alliances: the Allies and the Axis.", "WW2", "Home")
+            </li>
+        </ul>
+    </div>
+
+</div>

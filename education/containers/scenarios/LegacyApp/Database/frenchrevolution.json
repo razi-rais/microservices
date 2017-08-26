@@ -1,0 +1,420 @@
+[
+      {
+        "date": "1614/12/04",
+        "description": "The French Estates-General meets for the last time before the era of the French Revolution. In between, France will be governed as an absolute monarchy.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Estates-General",
+            "url": "http://en.wikipedia.org/wiki/French_States-General"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "France",
+            "url": "http://en.wikipedia.org/wiki/Kingdom_of_France"
+          },
+          {
+            "text_in_event": "absolute monarchy",
+            "url": "http://en.wikipedia.org/wiki/absolute_monarchy"
+          }
+        ]
+      },
+      {
+        "date": "1787/09/13",
+        "description": " Prussian troops enter the Netherlands. Within a few weeks 40,000 Patriots (out of a population of 2,000,000) go into exile in France (and learn from observation the ideals of the French Revolution).",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Prussia",
+            "url": "http://en.wikipedia.org/wiki/Prussia"
+          },
+          {
+            "text_in_event": "Netherlands",
+            "url": "http://en.wikipedia.org/wiki/Netherlands"
+          },
+          {
+            "text_in_event": "patriots",
+            "url": "http://en.wikipedia.org/wiki/patriots_(faction)"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          }
+        ]
+      },
+      {
+        "date": "1788/06/07",
+        "description": " France: Day of the Tiles, which some consider the beginning of the French Revolution.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "France",
+            "url": "http://en.wikipedia.org/wiki/France"
+          },
+          {
+            "text_in_event": "Day of the Tiles",
+            "url": "http://en.wikipedia.org/wiki/Day_of_the_Tiles"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          }
+        ]
+      },
+      {
+        "date": "1789/07/14",
+        "description": " The French Revolution (1789–1799) begins: Citizens of Paris storm the Bastille and free seven prisoners. In rural areas, peasants attack noble manors.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "1799",
+            "url": "http://en.wikipedia.org/wiki/1799"
+          },
+          {
+            "text_in_event": "Paris",
+            "url": "http://en.wikipedia.org/wiki/Paris"
+          },
+          {
+            "text_in_event": "storm the Bastille",
+            "url": "http://en.wikipedia.org/wiki/storming_of_the_Bastille"
+          }
+        ]
+      },
+      {
+        "date": "1790/07/12",
+        "description": " French Revolution: The Civil Constitution of the Clergy is passed. This completes the destruction of the monastic orders, legislating out of existence all regular and secular chapters for either sex, abbacies and priorships.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "Civil Constitution of the Clergy",
+            "url": "http://en.wikipedia.org/wiki/Civil_Constitution_of_the_Clergy"
+          }
+        ]
+      },
+      {
+        "date": "1790/07/14",
+        "description": " French Revolution: Citizens of Paris celebrate the constitutional monarchy and national reconciliation in the Fête de la Fédération.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Paris",
+            "url": "http://en.wikipedia.org/wiki/Paris"
+          },
+          {
+            "text_in_event": "Fête de la Fédération",
+            "url": "http://en.wikipedia.org/wiki/Fête_de_la_Fédération"
+          }
+        ]
+      },
+      {
+        "date": "1791/07/17",
+        "description": " The Champ de Mars Massacre occurs during the French Revolution.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Champ de Mars",
+            "url": "http://en.wikipedia.org/wiki/Champ_de_Mars"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          }
+        ]
+      },
+      {
+        "date": "1792/08/10",
+        "description": " French Revolution: The Tuileries Palace is stormed, and Louis XVI of France is arrested and taken into custody.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "Tuileries Palace",
+            "url": "http://en.wikipedia.org/wiki/Tuileries_Palace"
+          },
+          {
+            "text_in_event": "Louis XVI of France",
+            "url": "http://en.wikipedia.org/wiki/Louis_XVI_of_France"
+          }
+        ]
+      },
+      {
+        "date": "1792/09/02",
+        "description": " During what becomes known as the September Massacres of the French Revolution, rampaging mobs slaughter 3 Roman Catholic Church bishops and more than 200 priests.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "September Massacres",
+            "url": "http://en.wikipedia.org/wiki/September_Massacres"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "Roman Catholic Church",
+            "url": "http://en.wikipedia.org/wiki/Roman_Catholic_Church"
+          },
+          {
+            "text_in_event": "Bishop",
+            "url": "http://en.wikipedia.org/wiki/Bishop"
+          },
+          {
+            "text_in_event": "priest",
+            "url": "http://en.wikipedia.org/wiki/priest"
+          }
+        ]
+      },
+      {
+        "date": "1792/09/20",
+        "description": " Battle of Valmy: The French revolutionary army defeats Prussians under the Duke of Brunswick, after a 7-hour artillery duel.",
+        "lang": "en",
+        "granularity": "year",
+        "link": {
+          "text_in_event": "Battle of Valmy",
+          "url": "http://en.wikipedia.org/wiki/Battle_of_Valmy"
+        }
+      },
+      {
+        "date": "1793/02/01",
+        "description": " French Revolutionary Wars: France declares war on Great Britain and the Netherlands.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolutionary Wars",
+            "url": "http://en.wikipedia.org/wiki/French_Revolutionary_Wars"
+          },
+          {
+            "text_in_event": "France",
+            "url": "http://en.wikipedia.org/wiki/France"
+          },
+          {
+            "text_in_event": "Great Britain",
+            "url": "http://en.wikipedia.org/wiki/Great_Britain"
+          },
+          {
+            "text_in_event": "Netherlands",
+            "url": "http://en.wikipedia.org/wiki/Netherlands"
+          }
+        ]
+      },
+      {
+        "date": "1793/08/10",
+        "description": " French Revolution ampndash Feast of Unity: Crowds in Paris burn monarchist emblems.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "Paris",
+            "url": "http://en.wikipedia.org/wiki/Paris"
+          },
+          {
+            "text_in_event": "monarchist",
+            "url": "http://en.wikipedia.org/wiki/monarchist"
+          }
+        ]
+      },
+      {
+        "date": "1793/11/10",
+        "description": " The dechristianisation of France during the French Revolution reaches a climax with the celebration of the Goddess quotReasonquot in the cathedral of Notre Dame de Paris.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "dechristianisation of France during the French Revolution",
+            "url": "http://en.wikipedia.org/wiki/dechristianisation_of_France_during_the_French_Revolution"
+          },
+          {
+            "text_in_event": "Notre Dame de Paris",
+            "url": "http://en.wikipedia.org/wiki/Notre_Dame_de_Paris"
+          }
+        ]
+      },
+      {
+        "date": "1796/09/08",
+        "description": " French Revolutionary Wars ampndash Battle of Bassano: French forces defeat Austrian troops.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolutionary Wars",
+            "url": "http://en.wikipedia.org/wiki/French_Revolutionary_Wars"
+          },
+          {
+            "text_in_event": "Battle of Bassano",
+            "url": "http://en.wikipedia.org/wiki/Battle_of_Bassano"
+          },
+          {
+            "text_in_event": "French",
+            "url": "http://en.wikipedia.org/wiki/France"
+          },
+          {
+            "text_in_event": "Austria",
+            "url": "http://en.wikipedia.org/wiki/Austria"
+          }
+        ]
+      },
+      {
+        "date": "1796/11/17",
+        "description": " French Revolutionary Wars ampndash Battle of Arcole: French forces defeat the Austrians in Italy.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "French Revolutionary Wars",
+            "url": "http://en.wikipedia.org/wiki/French_Revolutionary_Wars"
+          },
+          {
+            "text_in_event": "Battle of Arcole",
+            "url": "http://en.wikipedia.org/wiki/Battle_of_Arcole"
+          },
+          {
+            "text_in_event": "French",
+            "url": "http://en.wikipedia.org/wiki/France"
+          },
+          {
+            "text_in_event": "Austria",
+            "url": "http://en.wikipedia.org/wiki/Austria"
+          },
+          {
+            "text_in_event": "Italy",
+            "url": "http://en.wikipedia.org/wiki/Italy"
+          }
+        ]
+      },
+      {
+        "date": "1797/02/14",
+        "description": " The Battle of Cape St. Vincent (1797), part of the Wars of the French Revolution.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Battle of Cape St. Vincent (1797)",
+            "url": "http://en.wikipedia.org/wiki/Battle_of_Cape_St._Vincent_(1797)"
+          },
+          {
+            "text_in_event": "Wars of the French Revolution",
+            "url": "http://en.wikipedia.org/wiki/Wars_of_the_French_Revolution"
+          }
+        ]
+      },
+      {
+        "date": "1802/04/26",
+        "description": " A general amnesty signed by Napoleon Bonaparte allows all but about 1,000 of the most notorious émigrés of the French Revolution to return to France, as part of a reconciliary gesture to make peace with the various factions of the ''Ancien Regime'' that ultimately consolidates his own rule.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Napoleon Bonaparte",
+            "url": "http://en.wikipedia.org/wiki/Napoleon_Bonaparte"
+          },
+          {
+            "text_in_event": "émigré",
+            "url": "http://en.wikipedia.org/wiki/émigré"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          },
+          {
+            "text_in_event": "France",
+            "url": "http://en.wikipedia.org/wiki/France"
+          },
+          {
+            "text_in_event": "Ancien regime",
+            "url": "http://en.wikipedia.org/wiki/Ancien_regime"
+          }
+        ]
+      },
+      {
+        "date": "1802/05/20",
+        "description": " By the Law of 20 May 1802, Napoleon Bonaparte reinstates slavery in the French colonies, revoking its abolition in the French Revolution.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Law of 20 May 1802",
+            "url": "http://en.wikipedia.org/wiki/Law_of_20_May_1802"
+          },
+          {
+            "text_in_event": "Napoleon Bonaparte",
+            "url": "http://en.wikipedia.org/wiki/Napoleon_Bonaparte"
+          },
+          {
+            "text_in_event": "French colonies",
+            "url": "http://en.wikipedia.org/wiki/French_colonies"
+          },
+          {
+            "text_in_event": "French Revolution",
+            "url": "http://en.wikipedia.org/wiki/French_Revolution"
+          }
+        ]
+      },
+      {
+        "date": "1805/12/26",
+        "description": "Napoleon annuls the 10-day week of the French Revolutionary Calendar he also orders his soldiers to be vaccinated.",
+        "lang": "en",
+        "granularity": "year",
+        "link": [
+          {
+            "text_in_event": "Napoleon",
+            "url": "http://en.wikipedia.org/wiki/Napoleon"
+          },
+          {
+            "text_in_event": "French Revolutionary Calendar",
+            "url": "http://en.wikipedia.org/wiki/French_Revolutionary_Calendar"
+          },
+          {
+            "text_in_event": "vaccinated",
+            "url": "http://en.wikipedia.org/wiki/vaccination"
+          }
+        ]
+      },
+      {
+        "date": "1814/11/07",
+        "description": "November ampampndash Congress of Vienna: The settling of the many issues arising from the French Revolutionary Wars, the Napoleonic Wars, and the dissolution of the Holy Roman Empire.",
+        "lang": "en",
+        "granularity": "year",
+        "link": {
+          "text_in_event": "Congress of Vienna",
+          "url": "http://en.wikipedia.org/wiki/Congress_of_Vienna"
+        }
+      },
+      {
+        "date": "1989/07/14",
+        "description": " France celebrates the 200th anniversary of the French Revolution.",
+        "lang": "en",
+        "granularity": "year",
+        "link": {
+          "text_in_event": "French Revolution",
+          "url": "http://en.wikipedia.org/wiki/French_Revolution"
+        }
+      }
+    ]

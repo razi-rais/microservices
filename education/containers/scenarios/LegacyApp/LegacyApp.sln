@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{A7EDA0E6-CE4B-4D44-827F-5A45076225D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{76ABFFCD-AB2A-4309-810C-2F2A8CA33854}"
+	ProjectSection(SolutionItems) = preProject
+		Database\frenchrevolution.json = Database\frenchrevolution.json
+		Database\import-json-files-to-tables.sql = Database\import-json-files-to-tables.sql
+		Database\renaissance.json = Database\renaissance.json
+		Database\ww1.json = Database\ww1.json
+		Database\ww2.json = Database\ww2.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd(Presentation Layer)", "WebApp\FrontEnd(Presentation Layer).csproj", "{DDF37B0E-0A48-46FF-9D4F-8148BAC0CFD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backup", "Backup", "{1EA744F5-8862-4B41-8FD0-AFCB923C2A20}"
+	ProjectSection(SolutionItems) = preProject
+		Database\Backup\HistoricEvents.bak = Database\Backup\HistoricEvents.bak
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7EDA0E6-CE4B-4D44-827F-5A45076225D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7EDA0E6-CE4B-4D44-827F-5A45076225D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7EDA0E6-CE4B-4D44-827F-5A45076225D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7EDA0E6-CE4B-4D44-827F-5A45076225D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF37B0E-0A48-46FF-9D4F-8148BAC0CFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF37B0E-0A48-46FF-9D4F-8148BAC0CFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF37B0E-0A48-46FF-9D4F-8148BAC0CFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF37B0E-0A48-46FF-9D4F-8148BAC0CFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1EA744F5-8862-4B41-8FD0-AFCB923C2A20} = {76ABFFCD-AB2A-4309-810C-2F2A8CA33854}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEB4D3D5-527C-4CB0-92B7-F0B7FC7EB3C1}
+	EndGlobalSection
+EndGlobal
