@@ -1,5 +1,0 @@
-#Docker image for legacy web app
-docker build -t legacyapp .
-
-#Docker image for database
-docker build -t sqldatabase .
