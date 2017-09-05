@@ -1,4 +1,4 @@
-{
+ {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
@@ -96,7 +96,7 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
 
-                            "commandToExecute": "powershell Set-ExecutionPolicy Bypass -Force ; powershell -Command 'iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''))'  ; powershell C:\\ProgramData\\chocolatey\\choco install -y putty ; powershell C:\\ProgramData\\chocolatey\\choco install -y nodejs.install; powershell C:\\ProgramData\\chocolatey\\choco install -y azure-cli; powershell C:\\ProgramData\\chocolatey\\choco install -y sql-server-management-studio; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudiocode; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017community ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-netcoretools ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-node –y ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-azure ; powershell C:\\ProgramData\\chocolatey\\choco install -y install docker-for-windows --pre ; " 
+                            "commandToExecute": "powershell Set-ExecutionPolicy Bypass -Force ; powershell -Command 'iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''))'  ; powershell C:\\ProgramData\\chocolatey\\choco install -y putty ; powershell C:\\ProgramData\\chocolatey\\choco install -y nodejs.install; powershell C:\\ProgramData\\chocolatey\\choco install -y azure-cli; powershell C:\\ProgramData\\chocolatey\\choco install -y sql-server-management-studio; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudiocode; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017community ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-netcoretools ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-node –y ; powershell C:\\ProgramData\\chocolatey\\choco install -y visualstudio2017-workload-azure ; powershell C:\\ProgramData\\chocolatey\\choco install -y docker-for-windows --pre ; " 
                              }
                     },
                     "dependsOn": [
