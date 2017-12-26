@@ -1,3 +1,8 @@
+##### Usage
+# sudo curl -O https://raw.githubusercontent.com/razi-rais/microservices/master/reference-material/install-minikube-ubuntu16.04LTS.sh
+# sudo chmod +x $PWD/install-minikube-ubuntu16.04LTS.sh
+
+
 sudo apt-get -y update 
 sudo apt-get -y upgrade
 
