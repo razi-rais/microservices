@@ -1,8 +1,11 @@
-##### Usage
+### Author : Razi Rais
+##### Usage: Run following instructions on Ubuntu 16.04 LTS
+##### NOTE: If you're using Azure make that vm support nested virtualization (e.g. Standard_D2s_v3):https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-general#dsv3-series-sup1sup
 # sudo -i
 # sudo curl -O https://raw.githubusercontent.com/razi-rais/microservices/master/reference-material/install-minikube-ubuntu16.04LTS.sh
 # sudo chmod +x $PWD/install-minikube-ubuntu16.04LTS.sh
 # ./install-minikube-ubuntu16.04LTS.sh 
+##########################################
 
 
 sudo apt-get -y update 
