@@ -1,0 +1,14 @@
+version : '2'
+
+services:
+  aspwebapp:
+    image: rbinrais/aspnetweb:2.0.2
+    ports:
+      - 80:80
+    depends_on:
+      - aspwebapi
+  aspwebapi:
+    image: rbinrais/aspnetapi:2.0.2
+    ports:
+      - 9000:9000
+      

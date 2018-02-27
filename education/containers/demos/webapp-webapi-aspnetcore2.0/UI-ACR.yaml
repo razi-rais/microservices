@@ -1,0 +1,35 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: webapp
+spec:
+  selector:
+    app: webapp
+    tier: frontend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webapp
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: canaryui
+          image: rzdockerregistry.azurecr.io/aspnetweb:2.0.2
+          ports:
+            - name: http
+              containerPort: 80
+      imagePullSecrets:
+        - name: acr

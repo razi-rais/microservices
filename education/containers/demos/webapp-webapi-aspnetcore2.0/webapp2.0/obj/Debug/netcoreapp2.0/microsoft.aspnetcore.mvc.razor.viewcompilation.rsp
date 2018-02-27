@@ -1,0 +1,13 @@
+/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0
+--output-path=obj/Debug/netcoreapp2.0/
+--application-name=webapp2.0
+--content-root=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Home/About.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Home/API.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Home/Contact.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Home/Index.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Shared/Error.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Shared/_Layout.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/Shared/_ValidationScriptsPartial.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/_ViewImports.cshtml
+--file=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapp2.0/Views/_ViewStart.cshtml

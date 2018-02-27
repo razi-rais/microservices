@@ -1,0 +1,5 @@
+/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapi2.0
+--output-path=obj/Debug/netcoreapp2.0/
+--application-name=webapi2.0
+--content-root=/Users/razi/Desktop/microservices/education/containers/demos/webapp-webapi-aspnetcore2.0/webapi2.0
+--file=
