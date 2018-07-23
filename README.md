@@ -1,17 +1,12 @@
-# Microservices - Education & Lessons Learned from the Field 
-  
 
-This repository contains the content that can help you develop skills on Microservices. The content is divided into education which is in the form of hands-on lab and guidance which in the form of reference material based on the real world experiences while working on projects.  
+## Overview 
+This repository contains content that will help you get started with building Microservices using Docker Containers, Kubernetes as technologies and Microsoft Azure as a platform.  
 
-The hands-on labs are divided into two technologies - containers and service fabric and are highly modular. You can choose if you like to focus on one technology vertical or more. For example, you can focus on both Containers and Microsoft Service Fabric but can also decide to focus on either of them. Labs are also kept with minimum dependencies among themselves however some basic level software installation / subscription will of course be needed which will be explained in detail in the first module.
+The strucure of the content is bit losse, but here is the list of artifacts availalbe. 
 
+## Azure Kubernetes Service (AKS)*
 
-All the content is distributed into a folder structure as follows:
-
-+ *Education*
-
-  + *Containers:*  All content in this folder is related to containers including labs and supporting documents. 
-
+  + *Part I – Kubernetes DevOps : Introduction to the Historic Events Microservice:*   
   + *Service-Fabric:* All content in this folder is related to Microsoft Service Fabric including labs and supporting documents. 
 
 + *Reference-Material:* Contains content related to architecture, design and implementation of Microservices but mainly driven by experiences and lesson learned from the field. This also means that content is spread across broad range of topics. For example, design consideration for building Microservices on Azure platform (Containers and Service Fabric) versus how to implement mutual TLS in a Docker Swarm cluster.
