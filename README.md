@@ -4,7 +4,7 @@ This repository contains content that will help you get started with building Mi
 
 The strucure of the content is bit losse, but here is the list of artifacts availalbe. 
 
-## Azure Kubernetes Service (AKS)*
+## Azure Kubernetes Service (AKS)
 
    + *[Part 1 - Introduction to the Historic Events Microservice](http://www.razibinrais.com/k8s-devops-part-1)*
   + *[Part 2 – Introduction to the Helm](http://www.razibinrais.com/k8s-devops-part-2)*  
@@ -23,3 +23,8 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
 [Download Sample Application - ASP.NET Core 2.0 UI + API ]https://github.com/razi-rais/microservices/tree/master/education/containers/demos/webapp-webapi-aspnetcore
 
 *Microsoft is now recommeding AKS instead of ACS. If you are focusing on hybrid workloads or workloads that require customizations that are not supported by AKS, then you should look into [acs-engine](https://github.com/Azure/acs-engine).
+
+## Artifacts
+
+If you are new to Azure and wanted to quick start development with Docker containers and k8s, check out following Azure ARM templates/scripts. These resources will help you spend less time installing/setup components but rather using them to build/test your application.
+
