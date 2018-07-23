@@ -8,8 +8,8 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
 
    + *[Part 1 - Introduction to the Historic Events Microservice](http://www.razibinrais.com/k8s-devops-part-1)*
   + *[Part 2 – Introduction to the Helm](http://www.razibinrais.com/k8s-devops-part-2)*  
-  + *[Part 3 – Building container and k8s artifacts using VSTS Build](#)* : Comming soon  
-  + *[Part 4 – Deploying into AKS cluster using Helm and VSTS Release ](#)*:   Comming soon
+  + *[Part 3 – VSTS Build - Build & Push Imagesto ACR and Building K8s artifacts](#)* : comming soon  
+  + *[Part 4 – Deploying into AKS cluster using Helm and VSTS Release ](#)*: comming soon
   
  **What to download the source code?**
   [Download Sample Application (ASP.NET Core & Node.JS) - Histroic Events Microservice](https://github.com/razi-rais/aks-helm-sample)
@@ -27,4 +27,77 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
 ## Artifacts
 
 If you are new to Azure and wanted to quick start development with Docker containers and k8s, check out following Azure ARM templates/scripts. These resources will help you spend less time installing/setup components but rather using them to build/test your application.
+
+### Azure - Linux Docker Developer Virtual Machine
+
+Azure ARM template that creates Azure Linux VM with following software installed:
+
+* Ubuntu Server 16.04 LTS
+* Docker (includes docker engine, client and docker compose)
+* Git
+* Nodejs
+* Dotnetcore 
+* Azure Cli
+* Yeoman
+* Bower
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fubuntu-1604LTS-docker.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fubuntu-1604LTS-docker.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
+
+
+After the virtual machine is created and running use the following command to find out versions of all of the installed software:
+
+```
+echo 'nodejs version ' $(node -v)  && echo 'npm version ' $(npm -v)  &&  echo 'dotnet version ' $(dotnet --version) && $(git --version) && az --version && printf "docker Client & Server version \n $(docker version)" 
+```
+
+### Azure - Windows Container Developer Virtual Machine
+
+Azure ARM template that creates Azure Windows Server 2016 VM with following software installed:
+
+* Windows Server 2016
+* Windows Containers - Docker Engine and Docker Compose (NOTE: This template does not support Docker Linux containers running on Windows Server 2016. If you need both Docker Linux containers and Windows Containers use the ARM template below that install Docker for Windows - it does require nested virtualization)
+* Chocolatey
+* Putty
+* Node 
+* Dotnetcore
+* Azure Cli
+* Sql Server Management Studio (SMSS) 17
+* Visual Studio Code
+* Visual Studio 2017 Community Edition
+  
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fwinsrv2016-docker.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fwinsrv2016-docker.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
+
+### Azure - Windows Container Developer Virtual Machine (with Docker for Windows)
+
+Azure ARM template that creates Azure Windows Server 2016 VM with following software installed. Please 
+note that Docker for Windows require nested virtualization. That is the reason behind using Standard_D2s_v3 
+for this ARM template. 
+
+* Windows Server 2016
+* Docker for Windows - Docker Engine and Docker Compose (NOTE: This supports both Docker Linux containers and Windows containers. If you are looking for Windows containers only then use the ARM template above)
+* Chocolatey
+* Putty
+* Node 
+* Dotnetcore
+* Azure Cli
+* Sql Server Management Studio (SMSS) 17
+* Visual Studio Code
+* Visual Studio 2017 Community Edition
+  
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fwin2016-vs2017-docker.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fwin2016-vs2017-docker.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
 
