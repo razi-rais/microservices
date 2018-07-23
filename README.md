@@ -120,12 +120,12 @@ If you are working with K8s and Docker, use this script to have following softwa
 
 Simple script that help you stress test containers. You run the script on the host and pass the number of cores (e.g. ``` StressCPUCores.ps1 2``` ) and it will hit each core with 100% utlization. If you want to have all cores to reach 100% utlization then leave the parameter empty (e.g. ``` StressCPUCores.ps1``` -  Note: make sure you know what you are doing because script will choke the CPU and operating system may become non-responsive)
 
-#### [Sress Test Memory - Windows Containers]
+#### Stress Test Memory - Windows Containers
 Simple one line command that will help you stress test the CPU memory. Please note that you need to download SysInternals utlity [testlimit64](https://live.sysinternals.com/windowsinternals/testlimit64.exe) first and make sure its available inside the running container.
 
 ``` 
 //NOTE: In the command below, testlimit64.exe is available inside C:/Downloads/ directory on the host. 
-//Also, -m switch limits //container memory usage to 1024 MB max. 
+//Also, -m switch limits the container memory usage to 1024 MB max. 
 
 docker run -it -m 1024M -v C:/Downloads/:C:/utils/ microsoft/windowsservercore powershell
 
