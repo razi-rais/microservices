@@ -21,6 +21,7 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
    + *[DevOps using Azure Container Service (DC/OS a  Swarm)](http://www.razibinrais.com/devops-with-containers)*
 
  **What to download the source code?**
+ 
 [Download Sample Application - ASP.NET Core 2.0 UI + API](https://github.com/razi-rais/microservices/tree/master/education/containers/demos/webapp-webapi-aspnetcore)
 
 *Microsoft is now recommeding AKS instead of ACS. If you are focusing on hybrid workloads or workloads that require customizations that are not supported by AKS, then you should look into [acs-engine](https://github.com/Azure/acs-engine).
@@ -101,4 +102,18 @@ for this ARM template.
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Frazi-rais%2Fmicroservices%2Fmaster%2Freference-material%2Farm-templates%2Fwin2016-vs2017-docker.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
+
+### Scripts 
+
+#### Setup Dev Box (Ubuntu Server or Client 16.04 LTS)
+
+If you are working with K8s and Docker, use this script to have following software installed.
+
+* Docker
+* Minikube
+* Kubectl
+* Helm
+* Azure CLI
+
+[Download](https://github.com/razi-rais/microservices/blob/master/reference-material/install-k8s-lab-software.sh)
 
