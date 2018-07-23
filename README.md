@@ -129,7 +129,7 @@ If you are working with K8s and Docker, use this script to have following softwa
 
 ### [Stress Test Windows Containers)[https://github.com/razi-rais/microservices/blob/master/reference-material/utility-scripts/Stress-TestCPUCores.ps1]
 
-Simple script that help you stress test containers. You run the script on the host, and pass the number of cores (e.g. ``` StressCPUCores.ps1 2``` ) and it will hit each core with 100% utlization. If you want to all core's to reach 100% utlization then leave the parameter empty (e.g. ``` StressCPUCores.ps1 2``` -  make sure you know what you are doing, because script will choke the CPU and operating system may become non-responsive)
+Simple script that help you stress test containers. You run the script on the host and pass the number of cores (e.g. ``` StressCPUCores.ps1 2``` ) and it will hit each core with 100% utlization. If you want to have all cores to reach 100% utlization then leave the parameter empty (e.g. ``` StressCPUCores.ps1``` -  Note: make sure you know what you are doing because script will choke the CPU and operating system may become non-responsive)
 
 
 
