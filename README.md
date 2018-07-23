@@ -105,7 +105,7 @@ for this ARM template.
 
 ### Scripts 
 
-#### Setup Dev Box (Ubuntu Server or Client 16.04 LTS)
+#### [Kubernetes Developer Machine (Ubuntu Server or Client 16.04 LTS)](https://github.com/razi-rais/microservices/blob/master/reference-material/install-k8s-lab-software.sh)
 
 If you are working with K8s and Docker, use this script to have following software installed.
 
@@ -114,6 +114,3 @@ If you are working with K8s and Docker, use this script to have following softwa
 * Kubectl
 * Helm
 * Azure CLI
-
-[Download](https://github.com/razi-rais/microservices/blob/master/reference-material/install-k8s-lab-software.sh)
-
