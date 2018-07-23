@@ -10,5 +10,7 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
   + *[Part II – Kubernetes DevOps : Introduction to the Helm](http://www.razibinrais.com/k8s-devops-part-2)*   
  
 
-+ *Reference-Material:* Contains content related to architecture, design and implementation of Microservices but mainly driven by experiences and lesson learned from the field. This also means that content is spread across broad range of topics. For example, design consideration for building Microservices on Azure platform (Containers and Service Fabric) versus how to implement mutual TLS in a Docker Swarm cluster.
- 
+## Azure Container Service (ACS)*
+
+
+* *Microsoft is now recommeding AKS instead of ACS. If you are focusing on hybrid workload you should look into [acs-engine](https://github.com/Azure/acs-engine)
