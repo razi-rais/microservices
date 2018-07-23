@@ -12,6 +12,7 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
   + *[Part 4 – Deploying into AKS cluster using Helm and VSTS Release ](#)*: comming soon
   
  **What to download the source code?**
+  
   [Download Sample Application (ASP.NET Core & Node.JS) - Histroic Events Microservice](https://github.com/razi-rais/aks-helm-sample)
  
 
@@ -20,7 +21,7 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
    + *[DevOps using Azure Container Service (DC/OS a  Swarm)](http://www.razibinrais.com/devops-with-containers)*
 
  **What to download the source code?**
-[Download Sample Application - ASP.NET Core 2.0 UI + API ]https://github.com/razi-rais/microservices/tree/master/education/containers/demos/webapp-webapi-aspnetcore
+[Download Sample Application - ASP.NET Core 2.0 UI + API](https://github.com/razi-rais/microservices/tree/master/education/containers/demos/webapp-webapi-aspnetcore)
 
 *Microsoft is now recommeding AKS instead of ACS. If you are focusing on hybrid workloads or workloads that require customizations that are not supported by AKS, then you should look into [acs-engine](https://github.com/Azure/acs-engine).
 
