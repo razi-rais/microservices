@@ -124,7 +124,8 @@ Simple script that help you stress test containers. You run the script on the ho
 Simple one line command that will help you stress test the CPU memory. Please note that you need to download SysInternals utlity [testlimit64](https://live.sysinternals.com/windowsinternals/testlimit64.exe) first and make sure its available inside the running container.
 
 ``` 
-//NOTE: In the command below, testlimit64.exe is available inside C:/Downloads/ directory on the host. Also, -m switch limits //      container memory usage to 1024 MB max. 
+//NOTE: In the command below, testlimit64.exe is available inside C:/Downloads/ directory on the host. 
+//Also, -m switch limits //container memory usage to 1024 MB max. 
 
 docker run -it -m 1024M -v C:/Downloads/:C:/utils/ microsoft/windowsservercore powershell
 
