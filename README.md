@@ -6,10 +6,11 @@ The strucure of the content is bit losse, but here is the list of artifacts avai
 
 ## Azure Kubernetes Service (AKS)
 
-   + *[Part 1 - Introduction to the Historic Events Microservice](http://www.razibinrais.com/k8s-devops-part-1)*
+  + *[Part 1 - Introduction to the Historic Events Microservice](http://www.razibinrais.com/k8s-devops-part-1)*
   + *[Part 2 – Introduction to the Helm](http://www.razibinrais.com/k8s-devops-part-2)*  
-  + *[Part 3 – VSTS Build - Build & Push Imagesto ACR and Building K8s artifacts](#)* : comming soon  
-  + *[Part 4 – Deploying into AKS cluster using Helm and VSTS Release ](#)*: comming soon
+  + *[Part 3 – VSTS Build - Build & Push Images to ACR and Building K8s Artifacts](#)* : comming soon  
+  + *[Part 4 – Deploying into AKS cluster using Helm and VSTS Release](#)*: comming soon
+  
   
  **What to download the source code?**
   
