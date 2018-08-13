@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ng-svc
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30101
+  selector:
+    target: dev
+  type: NodePort
