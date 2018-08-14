@@ -2,6 +2,8 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: pv-simple
+  annotations:
+    pv.beta.kubernetes.io/gid: "1234"
   labels:
     host: minikube
 spec:
@@ -11,4 +13,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mydata"
+    path: "/mnt/mydata"
