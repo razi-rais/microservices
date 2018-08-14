@@ -13,4 +13,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/mydata"
+    path: "/mnt/data"
