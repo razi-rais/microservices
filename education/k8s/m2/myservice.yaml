@@ -1,9 +1,27 @@
-kind: Service
 apiVersion: v1
+kind: Pod
 metadata:
-  name: myservice
+  name: ng-pod
+  labels:
+    kind: web
+    target: dev
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngservice
 spec:
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 9376
+    - port: 80
+      targetPort: 80
+      nodePort: 30101
+  selector:
+    target: dev
+  type: NodePort
