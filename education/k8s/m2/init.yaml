@@ -13,7 +13,4 @@ spec:
   initContainers:
   - name: init-myservice
     image: busybox
-    command: ['sh', '-c', 'while true; do echo "Waiting for fortune service to come up..."; wget http://fortune -q -T 1 -O /dev/null >/dev/null 2>/dev/null && break; sleep 1; done; echo "Service is up! Starting main container."']
-  - name: init-mydb
-    image: busybox
-    command: ['sh', '-c', 'until nslookup mydb; do echo waiting for mydb; sleep 2; done;']
+    command: ['sh', '-c', 'while true; do echo "Init container is waiting for myservice to come up..."; wget http://myservice -q -T 1 -O /dev/null >/dev/null 2>/dev/null && break; sleep 1; done; echo "myservice is up, starting the main container."']
