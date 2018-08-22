@@ -10,3 +10,7 @@ spec:
   - name: myapp-container
     image: busybox
     command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+initContainers:
+  - name: init-ngservice
+    image: busybox
+    command: ['sh', '-c', 'until [ $(wget --spider -S "http://ngservice" 2>&1 | grep "HTTP/" | awk '{print$2}') == "200" ]; do echo "Waiting for ngservice to come up..." ; sleep 3 ; done;']
