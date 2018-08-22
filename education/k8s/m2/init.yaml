@@ -13,4 +13,7 @@ spec:
 initContainers:
   - name: init-ngservice
     image: busybox
-    command: ['sh', '-c', 'until [ $(wget --spider -S "http://ngservice" 2>&1 | grep "HTTP/" | awk "{print$2}") == "200" ]; do echo "Waiting for ngservice to come up..." ; sleep 3 ; done;']
+    command: 
+    - sh
+    - c
+    - 'until [ $(wget --spider -S "http://ngservice" 2>&1 | grep "HTTP/" | awk "{print$2}") == "200" ]; do echo "Waiting for ngservice to come up..." ; sleep 3 ; done;'
