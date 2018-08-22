@@ -9,7 +9,7 @@ spec:
   - name: myapp-container
     image: busybox
     command: ['sh', '-c', 'echo The app is running! && sleep 3600']
-initContainers:
+  initContainers:
   - name: init-ngservice
     image: busybox
     command: 
