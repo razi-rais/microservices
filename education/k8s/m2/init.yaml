@@ -10,7 +10,3 @@ spec:
   - name: myapp-container
     image: busybox
     command: ['sh', '-c', 'echo The app is running! && sleep 3600']
-  initContainers:
-  - name: init-myservice
-    image: busybox
-    command: ['sh', '-c', 'while true; do echo "Init container is waiting for myservice to come up..."; wget http://myservice -q -T 1 -O /dev/null >/dev/null 2>/dev/null && break; sleep 1; done; echo "myservice is up, starting the main container."']
