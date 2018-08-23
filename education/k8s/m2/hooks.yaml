@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hooks
+spec:
+  containers:
+  - image: busybox
+    name: hooks
+    lifecycle:
+      postStart:
+        exec:
+          command: 
+          - sh
+          - -c
+          - "echo 'Hook failing with the  exit code -1'; sleep 3 ; exit -1"
