@@ -62,3 +62,8 @@ spec:
 status: {}
 ```
     
+### Task: Create a Pod in a test namespace and expose the nginx container on port 80
+
+```kubectl run ng --image=nginx --port=80 --namespace=test```
+
+> **NOTE** By using port switch you are making the container available within the Pod network but not externally. If you want to expose it externally you should use kubectl expose command. However you can still access the Pod from local machine by using portforwarding command ``` kubectl port-forward <<pod-name>> 80:5001 ```. Now access URL ```http://localhost:5001``` and you should able to access the nginx home page.
