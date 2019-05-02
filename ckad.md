@@ -1,6 +1,6 @@
 
-### Passing command line arguments to a container.
-#### Task: Create a pod that runs a container which prints passing command line arguments 
+### Objective: Passing command line arguments to a container.
+#### Task: Create a pod that runs a printenv command inside the container and passes command line arguments to print hostname and kubernetes port to the stdout.  
 
 * Option 1: Use kubectl run 
  ``` 
