@@ -61,7 +61,9 @@ spec:
         resources: {}
 status: {}
 ```
-    
+### Task: Creatre a Pod and list directory inside the running container
+```kubectl run logger3 --image=busybox --command=true -- /bin/sh -c ls ```
+
 ### Task: Create a Pod in a test namespace and expose the nginx container on port 80
 
 ```kubectl run ng --image=nginx --port=80 --namespace=test```
