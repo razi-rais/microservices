@@ -61,8 +61,12 @@ spec:
         resources: {}
 status: {}
 ```
-### Task: Creatre a Pod and list directory inside the running container
-```kubectl run logger3 --image=busybox --command=true -- /bin/sh -c ls ```
+### Task: Create a Pod and list directory inside the running container
+```kubectl run logger1 --image=busybox --command=true -- /bin/sh -c ls ```
+
+### Task: Create a Pod that writes some text to stdout every second
+```kubectl run logger2 --image=busybox --command -- /bin/sh -c 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done'```
+
 
 ### Task: Create a Pod in a test namespace and expose the nginx container on port 80
 
