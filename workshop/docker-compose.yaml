@@ -1,0 +1,18 @@
+version: '3'
+services:
+  voting-backend:
+    image: redis
+    container_name: voting-backend
+    ports:
+        - "6379:6379"
+
+  voting-frontend:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile.voting-app 
+    image: rbinrais/voting-app:1.0.0
+    container_name: voting-app
+    environment:
+      REDIS: voting-backend
+    ports:
+        - "8080:80"
