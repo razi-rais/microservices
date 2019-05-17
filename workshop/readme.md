@@ -7,7 +7,7 @@ This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 ## Prerequisites 
 > Approximate time to complete this section is 10 minutes
 
-In this training we will use [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) to run a local Kubernetes instance. We will access this local Kubernetes with the client called `kubectl`.
+In this training we will use [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) to run a local Kubernetes cluster. We will access this local Kubernetes cluster with the client tool  `kubectl`.
 
 > NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. It is reocmmended to use virtualbox as a hypervisor if possible. 
 
@@ -20,7 +20,7 @@ $ minikube version
 minikube version: v1.0.1
 ```
 
-Now, start the minikube. Please note that --vm-driver parameter is dependent on the type of hypervisor used during the minikube setup. Following example is using virtualbox but may need to change it if using a different hypervisor.
+Now, start the minikube. Please note that ```--vm-driver``` parameter is dependent on the type of hypervisor used during the minikube setup. Following example is using virtualbox but may need to change it if using a different hypervisor.
 
 ```
 $ minikube minikube start --vm-driver=virtualbox
