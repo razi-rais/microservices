@@ -122,3 +122,28 @@ Commercial support is available at
 </html>
 ```
 
+Alright, that was good but you may be wondering shouldn't there be a declarative way to define Pod, Deployment and Service? Perhaps using YAML or JSON format. That is a valid point and typically declarative style works better in most cases. It also aligns well with the "Infrastrucre as a Code" theme that is common in the DevOps community. For the reminder of the labs you will be using YAML files to create Pods, Deployments, Services etc. 
+
+To view to the YAML/JSON definition of the Kubernetes objects created in previous steps you can use -o (output) swtich and get the definition of a particular object in YAML or in JSON format 
+
+For example get the definition of deployment in YAML
+```
+$ kubectl get deployment ngx -o yaml
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2019-05-17T17:18:07Z"
+  generation: 1
+  labels:
+    type: webserver
+  name: ngx
+  namespace: default
+  resourceVersion: "101467"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/ngx
+  uid: bcfc77dc-78c7-11e9-8278-08002732c767
+.....(Output truncated for brevity)
+```
+
