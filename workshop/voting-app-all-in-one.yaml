@@ -1,0 +1,77 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name:  voting-app-backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        type: database 
+        env: dev
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: backend
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-backend
+spec:
+  ports:
+  - port: 6379
+  selector:
+    type: database
+    env: dev
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: voting-app-front
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        env: dev
+        type: webapp
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: webfront
+        image: voting-webapp:1.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: REDIS
+          value: "voting-backend"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-front
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+  selector:
+    type: webapp
+    env: dev
