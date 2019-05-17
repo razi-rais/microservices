@@ -12,8 +12,8 @@ In this training we will use [minikube](https://kubernetes.io/docs/getting-start
 > NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. It is reocmmended to use virtualbox as a hypervisor if possible. 
 
 * Clone the repo:  ``` git clone  https://github.com/razi-rais/microservices.git && cd microservices/workshop  ```
-* Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety operating system)
-* Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (This link contains step by step insructions to setup Minikube on variety operating system)
+* Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety of operating system)
+* Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (This link contains step by step insructions to setup Minikube on variety of operating systems)
 
 
 After successfull installation of minikube and kubectl verfiy the setup:
@@ -149,9 +149,71 @@ metadata:
 .....(Output truncated for brevity)
 ```
 
-## Build, Package, Deploy and Run a multi-container application 
+## Build, Package, Deploy and Run a multi-container application with Kubernetes
+
 ```
-$ 
+$ docker build -t voting-webapp:1.0 -f Dockerfile.voting-app .
+
+Sending build context to Docker daemon   42.5kB
+Step 1/3 : FROM tiangolo/uwsgi-nginx-flask:python3.6
+ ---> 80478e7b12fc
+Step 2/3 : RUN pip install redis
+ ---> Using cache
+ ---> 7ae0710ee5d2
+Step 3/3 : ADD /voting-app /app
+ ---> Using cache
+ ---> 626972034c28
+Successfully built 626972034c28
+Successfully tagged voting-webapp:1.0
+```
+
+We start with the backend. Redis is used to store the of the voting.
+
+```
+$ kubectl apply -f voting-app-back-dep.yaml 
+```
+
+Verify the deployment was successful and pod is up and running.
+```
+$ kubectl get deployment voting-app-backend 
+NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+voting-app-backend   1/1     1            1           68s
+
+$ kubectl get po -l type=database
+NAME                                READY   STATUS    RESTARTS   AGE
+voting-app-backend-f77bd6f4-f5gkd   1/1     Running   0          93s
 
 ```
 
+Next, let us create the service so front-end web app can access the backend (we will deploy it soon). Remember database and webapp are running in two different pods and need to communicate via service endpoint. 
+
+```
+$ kubectl apply -f voting-app-back-svc.yaml 
+
+$ kubectl get svc voting-backend 
+NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+voting-backend   ClusterIP   10.96.191.22   <none>        6379/TCP   41s
+```
+
+
+
+
+The next step is to create the deployment that contains the pod definition.  
+
+```
+$ kubectl apply -f voting-app-front-dep.yaml 
+```
+
+This will bring the voting-app pod up. 
+
+```
+$ kubectl get po -l type=webapp
+
+NAME                                READY   STATUS    RESTARTS   AGE
+voting-app-front-596476c4c6-6nqfj   1/1     Running   0          6m15s
+```
+
+
+
+
+> Since minikube is running inside a virtual machine it's really handy to reuse the Docker daemon inside that virtual machine; as this means you don't have to build on your host machine and push the image into a docker registry. All you need to do is run the command ```eval $(minikube docker-env)```. More details [here](https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon)
