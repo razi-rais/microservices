@@ -1,8 +1,11 @@
+[Kubernetes Workshop]: https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F61927274%2F33665835691%2F1%2Foriginal.20190508-183855?w=800&auto=compress&rect=0%2C180%2C2880%2C1440&s=346b95d80ba641c619491d2a2bda643c
+
 # Kubernetes Workshop
 
 This repository contains setup instructions and hands-on labs for the [Kubernetes Workshop](https://www.eventbrite.com/e/building-microservices-using-kubernetes-hands-on-workshop-online-attendence-option-available-tickets-61595687359).
 This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 
+https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F61927274%2F33665835691%2F1%2Foriginal.20190508-183855?w=800&auto=compress&rect=0%2C180%2C2880%2C1440&s=346b95d80ba641c619491d2a2bda643c
 
 ## Prerequisites 
 > Approximate time to complete this section is 10 minutes
@@ -20,7 +23,7 @@ $ minikube version
 minikube version: v1.0.1
 ```
 
-Now, start the minikube. Please note that ```--vm-driver``` parameter is dependent on the type of hypervisor used during the minikube setup. Following example is using virtualbox but may need to change it if using a different hypervisor.
+Now, start the minikube. Please note that ```--vm-driver``` parameter is dependent on the type of hypervisor used during the minikube setup. Following example is using virtualbox as a hypervisor but you may need to change the value depending on your choice of the hypervisor.
 
 ```
 $ minikube minikube start --vm-driver=virtualbox
