@@ -24,6 +24,7 @@ Now, start the minikube. Please note that ```--vm-driver``` parameter is depende
 
 ```
 $ minikube minikube start --vm-driver=virtualbox
+
 😄  minikube v1.0.1 on darwin (amd64)
 🤹  Downloading Kubernetes v1.14.1 images in the background ...
 💡  Tip: Use 'minikube start -p <name>' to create a new cluster, or 'minikube delete' to delete this one.
@@ -46,5 +47,20 @@ $ kubectl version
 
 Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-19T22:12:47Z", GoVersion:"go1.12.4", Compiler:"gc", Platform:"darwin/amd64"}
 Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:02:58Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+```
+
+You can take minikube to a test drive right away to make sure things are working as expected! Let us run a nginx server in a kubernetes way.
 
 ```
+$ kubectl run ngx --image=nginx --labels="type=webserver" 
+```
+
+Now run the command to see the Pod running the nginx container.
+
+```
+$  kubectl get po -l type=webserver
+NAME                   READY   STATUS    RESTARTS   AGE
+ngx-5f48d9f7f5-xzxtz   1/1     Running   0          78s
+```
+
+
