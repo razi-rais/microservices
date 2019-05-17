@@ -167,6 +167,9 @@ Successfully built 626972034c28
 Successfully tagged voting-webapp:1.0
 ```
 
+> Since minikube is running inside a virtual machine it's really handy to reuse the Docker daemon inside that virtual machine; as this means you don't have to build on your host machine and push the image into a docker registry. All you need to do is run the command ```eval $(minikube docker-env)```. More details [here](https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon)
+
+
 We start with the backend. Redis is used to store the of the voting.
 
 ```
@@ -195,25 +198,35 @@ NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 voting-backend   ClusterIP   10.96.191.22   <none>        6379/TCP   41s
 ```
 
-
-
-
-The next step is to create the deployment that contains the pod definition.  
+At this point the backend work is done. We can now begin deploying the front end webapp.
 
 ```
 $ kubectl apply -f voting-app-front-dep.yaml 
 ```
 
-This will bring the voting-app pod up. 
+Verify that the deplpoyment is successfull and pod is running.
 
 ```
+$ kubectl get deployment voting-app-front
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+voting-app-front   1/1     1            1           16m
+
 $ kubectl get po -l type=webapp
 
 NAME                                READY   STATUS    RESTARTS   AGE
 voting-app-front-596476c4c6-6nqfj   1/1     Running   0          6m15s
 ```
 
+```
+$ kubectl apply -f voting-app-front-svc.yaml 
 
+$ kubectl get service voting-front
+NAME           TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+voting-front   NodePort   10.102.202.223   <none>        80:32636/TCP   10s
+```
 
-
-> Since minikube is running inside a virtual machine it's really handy to reuse the Docker daemon inside that virtual machine; as this means you don't have to build on your host machine and push the image into a docker registry. All you need to do is run the command ```eval $(minikube docker-env)```. More details [here](https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon)
+```
+$ minikube service voting-front --url
+http://192.168.99.102:32636
+```
+![voting-app](./images/voting-app-1.png) 
