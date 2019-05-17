@@ -12,8 +12,8 @@ In this training we will use [minikube](https://kubernetes.io/docs/getting-start
 > NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. It is reocmmended to use virtualbox as a hypervisor if possible. 
 
 * Clone the repo:  ``` git clone  https://github.com/razi-rais/microservices.git && cd microservices/workshop  ```
-* Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube). This setup includes step by step insructions to setup Minikube on a specefic operating system are availabe.
-* Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).This setup includes step by step insructions to setup minikube on a specefic operating system are availabe.
+* Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety operating system)
+* Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (This link contains step by step insructions to setup Minikube on variety operating system)
 
 
 After successfull installation of minikube and kubectl verfiy the setup:
