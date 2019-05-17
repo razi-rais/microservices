@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name:  voting-app-backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        type: database 
+        env: dev
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: backend
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
