@@ -280,9 +280,9 @@ $ eval $(minikube docker-env)
 
 $ docker build -t voting-webapp:2.0 -f Dockerfile.voting-app .
 
-```
 $ kubectl apply -f voting-app-front-v2-dep.yaml 
 
 $ kubectl rollout undo deployment/voting-app-front
 ```
+
 ![voting-app](./images/voting-app-2.png) 
