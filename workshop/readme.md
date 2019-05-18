@@ -286,3 +286,57 @@ $ kubectl rollout undo deployment/voting-app-front
 ```
 
 ![voting-app](./images/voting-app-2.png) 
+
+## Working with Kubernetes Dashboard (UI)
+
+
+## Grafana
+
+```
+$ minikube addons enable heapster
+✅  heapster was successfully enabled
+
+$ minikube service monitoring-grafana --url -n=kube-system
+http://192.168.99.102:30002
+```
+
+## Explore Logs using EFK (Elasticsearch, Fluentd, Kibana)
+
+This is powerful add-on consists of a combination of Elasticsearch, Fluentd and Kibana. Elasticsearch is a search engine that is responsible for storing our logs and allowing for them to be queried. Fluentd sends log messages from Kubernetes to Elasticsearch, whereas Kibana is a graphical interface for viewing and querying the logs stored in Elasticsearch.
+
+> Note: this addon should not be used as-is in production. This is an example and you should treat it as such. Please see at least the Security and the Storage sections for more information.[here](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch)
+
+You start by enabling the EFK addon with minikube.
+```
+$ minikube addons enable efk
+✅  efk was successfully enabled
+```
+It takes few seconds for all the pods related to efk to come up.
+```
+$ kubectl get po -n kube-system  -l "k8s-app in (fluentd-es,kibana-logging,elasticsearch-logging)"
+NAME                          READY   STATUS    RESTARTS   AGE
+elasticsearch-logging-rdq7p   1/1     Running   0          112m
+fluentd-es-tlg5m              1/1     Running   0          112m
+kibana-logging-4mh5f          1/1     Running   0          112m
+```
+
+> In the previous command you are filtering out the pods based on labels. It may seems advanced use case but its rather simple. Its a OR condition saying "give me all pods that have label ```k8s-app``` with one of the three values. This is helpful because we don't want to get everything that exists in ```kube-system``` namespace but rather focus on only the pods created by efk addons and have specefic labels. Learn more about use of labels [here](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+ 
+The pod that gives us the dashboard UI to work the the logs is the one running Kibana. You can get to the dashboard in one of the two ways (first method is preferred)
+
+```
+$ minikube service kibana-logging --url -n kube-system
+http://192.168.99.102:30003
+```
+
+```
+$ kubectl port-forward kibana-logging-4mh5f 5601:5601 -n kube-system
+Forwarding from 127.0.0.1:5601 -> 5601
+Forwarding from [::1]:5601 -> 5601
+
+```
+
+Now open the browser and navigate to the URL pointing to the kibana endpoint (```http://192.168.99.102:30003``` or ```http://27.0.0.1:5601``` )
+
+Kibana provides extensive features to work with logs by using all sorts of patterns etc. For now we will keep it simple and view the logs from the pod running voting-front webapp. 
+
