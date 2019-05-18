@@ -257,7 +257,7 @@ $ kubectl get po -l type=webapp
 
 Change the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
 
-Before 
+**Before | config_file.cfg**
 ```
 # UI Configurations
 TITLE = 'Awesome Voting App'
@@ -265,7 +265,8 @@ VOTE1VALUE = 'Cats'
 VOTE2VALUE = 'Dogs'
 SHOWHOST = 'false' 
 ```
-After 
+
+**After | config_file.cfg**
 ```
 # UI Configurations
 TITLE = 'Awesome Voting App v2'
