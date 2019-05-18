@@ -5,7 +5,7 @@ This repository contains setup instructions and hands-on labs for the [Kubernete
 This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 
 ## Prerequisites 
-> Approximate time to complete this section is 10 minutes
+> Approximate time to complete this task is 15 minutes
 
 In this training we will use [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) to run a local Kubernetes cluster. We will access this local Kubernetes cluster with the client tool  `kubectl`.
 
@@ -151,6 +151,8 @@ metadata:
 
 ## Build, Package, Deploy and Run a multi-container application with Kubernetes
 
+> Approximate time to complete this task is 15 minutes
+
 ```
 $ docker build -t voting-webapp:1.0 -f Dockerfile.voting-app .
 
@@ -247,6 +249,8 @@ replicaset.apps/voting-app-front-596476c4c6   1         1         1       2m20s
 ```
 
 ## Scaling the deloyment
+
+> Approximate time to complete this task is 5 minutes
 ```
 $ kubectl scale --replicas=2 deployment/voting-app-front
 
@@ -254,6 +258,8 @@ $ kubectl get po -l type=webapp
 ```
 
 ## Rolling updates
+
+> Approximate time to complete this task is 10 minutes
 
 Change the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
 
@@ -287,20 +293,55 @@ $ kubectl rollout undo deployment/voting-app-front
 
 ![voting-app](./images/voting-app-2.png) 
 
-## Working with Kubernetes Dashboard (UI)
+## Performance monitoring using Grafana and Kubernetes Dashboard 
+
+> Approximate time to complete this task is 10 minutes
 
 
-## Grafana
+For development purpose, I highly recommend enabling heapster add-on. Heapster enables multi-level monitoring and performance analysis including pods, nodes, and cluster.
+
+Under the hood, it is using InfluxDB as the storage backend for metric data and Grafana as visualization UI.
+
+> Approximate time to complete this task is 5 minutes
 
 ```
 $ minikube addons enable heapster
 ✅  heapster was successfully enabled
+```
 
+Once the addon is installed you can access the Grafana UI using one of the following commands:
+
+Option-1
+```
+$ minikube addons open heapster
+```
+
+Option-2
+Use the URL of the service endpoint to access the Grafana UI.
+```
 $ minikube service monitoring-grafana --url -n=kube-system
 http://192.168.99.102:30002
 ```
 
+Either way you should able to land on the Grafana UI.
+
+![grafana](./images/grafana-1.png) 
+
+From the top pane select "Home" and then select "Pods".
+
+![grafana](./images/grafana-2.png) 
+
+You will be taken to a dashbord displaying various peformance related metrics like individual pod CPU, memory, network and filesystem usage. Change the namespace from ```kube-system``` to ```default``` and then select voting-front-app pod. The dashboard will update automatically to reflect the values related to the pod. 
+
+![grafana](./images/grafana-3.png) 
+
 ## Explore Logs using EFK (Elasticsearch, Fluentd, Kibana)
+
+```
+$ kubectl logs pod_name
+
+```
+> Approximate time to complete this task is 15 minutes
 
 This is powerful add-on consists of a combination of Elasticsearch, Fluentd and Kibana. Elasticsearch is a search engine that is responsible for storing our logs and allowing for them to be queried. Fluentd sends log messages from Kubernetes to Elasticsearch, whereas Kibana is a graphical interface for viewing and querying the logs stored in Elasticsearch.
 
