@@ -254,11 +254,32 @@ $ kubectl get po -l type=webapp
 ```
 
 ## Rolling updates
+
+Change the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
+
+Before 
+```
+# UI Configurations
+TITLE = 'Awesome Voting App'
+VOTE1VALUE = 'Cats'
+VOTE2VALUE = 'Dogs'
+SHOWHOST = 'false' 
+```
+After 
+```
+# UI Configurations
+TITLE = 'Awesome Voting App v2'
+VOTE1VALUE = 'Cats'
+VOTE2VALUE = 'Dogs'
+SHOWHOST = 'false'
+```
+
 ```
 $ eval $(minikube docker-env)
 
 $ docker build -t voting-webapp:2.0 -f Dockerfile.voting-app .
 
+```
 $ kubectl apply -f voting-app-front-v2-dep.yaml 
 
 $ kubectl rollout undo deployment/voting-app-front
