@@ -230,3 +230,37 @@ $ minikube service voting-front --url
 http://192.168.99.102:32636
 ```
 ![voting-app](./images/voting-app-1.png) 
+
+```
+kubectl get all -l env=dev
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/voting-app-backend-f77bd6f4-24757   1/1     Running   0          2m20s
+pod/voting-app-front-596476c4c6-k4qlj   1/1     Running   0          2m20s
+
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/voting-app-backend   1/1     1            1           2m20s
+deployment.apps/voting-app-front     1/1     1            1           2m20s
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/voting-app-backend-f77bd6f4   1         1         1       2m20s
+replicaset.apps/voting-app-front-596476c4c6   1         1         1       2m20s
+```
+
+## Scaling the deloyment
+```
+$ kubectl scale --replicas=2 deployment/voting-app-front
+
+$ kubectl get po -l type=webapp 
+```
+
+## Rolling updates
+```
+$ eval $(minikube docker-env)
+
+$ docker build -t voting-webapp:2.0 -f Dockerfile.voting-app .
+
+$ kubectl apply -f voting-app-front-v2-dep.yaml 
+
+$ kubectl rollout undo deployment/voting-app-front
+```
+![voting-app](./images/voting-app-2.png) 
