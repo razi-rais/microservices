@@ -446,7 +446,7 @@ voting-app-front-5f869574b7-wk8rl   1/1     Running   0          20s
 
 Let's make a minor change to the voting front web app and see how we can deploy the application again without downtime!
 
-Beging by change the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
+Begin by changing the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
 
 **Before | config_file.cfg**
 ```
@@ -528,9 +528,9 @@ $ kubectl rollout undo deployment/voting-app-front
 
 To view the performace monitoring metrics in Kubernetes, Grafana provides a popular visualization dashboard. This is done by enabling Heapster addon which provides multi-level monitoring and performance analysis including pods, nodes, and cluster. Behind the scenes, it leverages InfluxDB as the storage backend for metric data and Grafana as visualization UI.
 
-> Note: Minikube has a set of built in addons that can be used enabled, disabled, and opened inside of the local Kubernetes environment. They provide a convenient way to enable or disable features in your Kubernetes envrioment. You can find more details about addons [here](https://github.com/kubernetes/minikube/blob/master/docs/addons.md) 
+> Note: Minikube provides you with the built in addons that can be enabled,disabled, and opened inside of the local Kubernetes environment. They provide a convenient way to enable or disable features in your Kubernetes envrioment. You can find more details about addons [here](https://github.com/kubernetes/minikube/blob/master/docs/addons.md) 
 
-You start by enabling an heapster addon:
+You start by enabling the heapster addon:
 
 ```
 $ minikube addons enable heapster
@@ -550,6 +550,8 @@ Use the URL of the service endpoint to access the Grafana UI.
 $ minikube service monitoring-grafana --url -n=kube-system
 http://192.168.99.102:30002
 ```
+
+> Note: ```kube-system``` is a type of Kubernetes namespace. Namespace provide a scope for names. Names of resources need to be unique within a namespace, but not across namespaces. You can think of them as way to isolate resources. The ```kube-system``` namespace contains Pods,Deployments etc that are used by the Kubernetes system itself. Everything you define by default goes to a ```default``` namespace. You can read more about namespaces [here](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces)
 
 Either way you should able to land on the Grafana UI.
 
