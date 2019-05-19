@@ -269,18 +269,18 @@ spec:
 ```
 
 #### Voting Application | Backend 
-The backend deployment defines a pod that runs a redis cache. It has labels ```type: database``` and ``` env: dev``` assigned to it.  
+The backend deployment definition ```voting-app-back-dep.yaml ``` defines a pod that runs a redis cache. It also assign labels ```type: database``` and ``` env: dev```  to the pod.  
 
 ![voting-app-arch-1](./images/voting-app-arch-2.png)
 
-You can review the contents of ```voting-app-back-dep.yaml ``` to get a sense of how pod, container, labels and relicas are defined inside a deployment definition. Below is the summary of most releveant parts:
+You can review the contents of ```voting-app-back-dep.yaml ``` to get a sense of how pod, container, labels and replicas are defined inside a deployment definition. Below is the summary of most releveant parts:
 
 | Type   |      Value      |  Details |
 |----------|:-------------:|------:|
 | name  | voting-app-backend |  Name of the pod|
 | labels |    env: dev , env: database   |   Labels associated with the pod|
 | containers | image: redis |   Container image redis (available from Docker Hub) |
-| containers | name: backend | Mame of the container|
+| containers | name: backend | Name of the container|
 
 ```
 apiVersion: apps/v1beta1
@@ -305,7 +305,7 @@ spec:
           name: redis
 ```
 
-We also have ```voting-app-back-svc.yaml ``` that defines the service to expose the redis cache. It is needed because voting front end webapp is running in a different pod and won't able to access it otherwise. Also note that unlike the front end service it does expose the service to Kubernetes Node. The reason is simple - we are not expecting anyone outside voting front end webapp to connect to it!  
+We also have ```voting-app-back-svc.yaml ``` that defines the service to expose the redis cache. It is needed because voting front end webapp is running in a different pod and won't able to access it otherwise. Also note that unlike the front end service it does not expose the service as an enpoint on the Kubernetes Node. The reason is simple - we are not expecting any incoming requests from outside of Kubernetes cluster so better not to expose it.
 
 ```
 apiVersion: v1
