@@ -153,6 +153,9 @@ metadata:
 
 > Approximate time to complete this task is 15 minutes
 
+![voting-app-arch-1](./images/voting-app-arch-1.png)
+
+![voting-app-arch-1](./images/voting-app-arch-2.png)
 ```
 $ docker build -t voting-webapp:1.0 -f Dockerfile.voting-app .
 
