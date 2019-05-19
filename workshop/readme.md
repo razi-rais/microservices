@@ -151,9 +151,85 @@ metadata:
 
 ## Build, Package, Deploy and Run a multi-container application with Kubernetes
 
-> Approximate time to complete this task is 15 minutes
+> Approximate time to complete this task is 30 minutes
+
+In this section you will build, package, deploy and run a multi-container application to a minikube Kubernetes locally. Later, you will learn how scale and perform rolling update to it using Kubernetes. 
+
+Let's review the application. Its a simple python web application that provides you with an option to vote for your favorite animal (cats or dogs). The voting results are store in a Redis cache. 
+
+The UI is shown below:
+![voting-app](./images/voting-app-1.png) 
+ 
+ You can review the code artifacts by browsing the directory: ```voting-app```. You can take a peek at it now but considering that its a very basic python code we won't spend time going into any details.
+
+Let's focus on the Kubernetes artifacts and view them conceptually as they fit into Kubernetes architecture. 
+
+#### Voting Application | Front End WebApp
+
+Right at the center you have a WebApp (packaged and running as a container). This is the python webapp that you will package as a Docker container shortly. The container itself resides in a pod. Pod is a basic object iniside Kubernetes and unlike Docker you cannot run container without having a pod. Pod also allows you to add  miscellaneous pieces of information like labels to it. Label helps you to tag information to a pod in a key/value format. We have labels ```type: webapp``` and ```env: dev``` assigned to the pod. Pods are usually defined inside a ```Deployment``` to get the benefit of rolling updates and ensuring you always have certain number of pods running in the cluster to get high availablity. Kubernetes use a concept of replica-set to ensure minium number of pods are always running. 
 
 ![voting-app-arch-1](./images/voting-app-arch-1.png)
+
+You can review the contents of ```voting-app-front-dep.yaml ``` to get a sense of how pod, container, labels and relicas are defined inside a deployment definition. Below is the summary of most releveant parts:\
+
+| Type   |      Value      |  Details |
+|----------|:-------------:|------:|
+| name  | voting-app-front |  Name of the pod|
+| labels |    env: dev , env: webapp   |   Labels associated with the pod|
+| containers | image: voting-webapp:1.0 |   Container image name to run |
+| containers | name: webfront | name of a container|
+
+```
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: voting-app-front
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        env: dev
+        type: webapp
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: webfront
+        image: voting-webapp:1.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: REDIS
+          value: "voting-backend"
+```
+
+Another important Kubernetes object is the ```Service```. It is responsibe to route traffic to the Pod and ultimately to the container. Our webapp runs on port 80 inside the pod. This is fine but as-is it won't be easily accessaible to you because Kubernetes run a internal cluster network so IPs and access to it is not easy. This is where service comes into the picture. We are using service definition ```voting-app-front-dep.yaml ``` that asks Kubernetes to open a port on a Kubernetes node (which is a the minikube virtual machine in our case). But how does services knows which Pod to route traffic to? It uses labels! This can sound strange at first but service has no direct ties to the Pod at all. Its all losely coupled a service selects pods to route traffic to based on labels defined in the service definition file. In our case the labels are ``` type:webapp``` and ``` env:dev```. Also the ```type: NodePort``` means that Kubernetes will use a higher value port (typically in the range of 300000+) on the Node and listen it and then route it to port 80 as define by ```port:80``` within the ```ports```.  
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-front
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+  selector:
+    type: webapp
+    env: dev
+```
 
 ![voting-app-arch-1](./images/voting-app-arch-2.png)
 ```
