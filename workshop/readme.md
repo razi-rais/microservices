@@ -449,7 +449,7 @@ voting-app-front-5f869574b7-wk8rl   1/1     Running   0          20s
 
 Let's make a minor change to the voting front web app and see how we can deploy the application again without downtime!
 
-Begin by changing the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
+Begin by changing the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing the ```config_file.cfg``` file located inside ```/voting-app``` directory.
 
 **Before | config_file.cfg**
 ```
