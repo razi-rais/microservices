@@ -469,9 +469,7 @@ spec:
 .......(Output truncated for brevity)
 ```
 
-Also, its important to highlight the ```strategy``` section in the deployment file. Basically the ```rollingUpdate``` is a type of update stragey which specify ```maxUnavailable``` and ```maxSurge``` to control the rolling update process. The  ```maxUnavailable``` specifies the maximum number of Pods that can be unavailable during the update process and it is set to ```1``` meaning only single pod can be down at any point in time during the update process. Also, ```maxSurge``` specifies the maximum number of Pods that can be created over the desired number of Pods and currently it is set to ```1``` which means only one Pod will be added at a time. In a nutshell with this definition we always have at least one pod running making sure in comming traffic don't get disrupted. 
-
- . You can learn more about other stragies [here](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
+Also, its important to highlight the ```strategy``` section in the deployment file. Basically the ```rollingUpdate``` is a type of update stragey which specify ```maxUnavailable``` and ```maxSurge``` to control the rolling update process. The  ```maxUnavailable``` specifies the maximum number of Pods that can be unavailable during the update process and it is set to ```1``` meaning only single pod can be down at any point in time during the update process. Also, ```maxSurge``` specifies the maximum number of Pods that can be created over the desired number of Pods and currently it is set to ```1``` which means only one Pod will be added at a time. In a nutshell with this definition we always have at least one pod running making sure in comming traffic don't get disrupted. You can learn more about various options available for the strategy [here](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
 
 Its time to go head and perfrom the rolling update!
 
@@ -483,7 +481,7 @@ Refresh the voting web app and you should see the updates in action.
 
 ![voting-app](./images/voting-app-2.png) 
 
-Although the deployed worked out fine we are now going to roll it back to the last version. This is useful when things don't go according to plan. Rolling back is simple you basically point out to the deployment and use the ```rollout``` command with the ```undo`` parameter.
+Although the deployed worked out fine we are now going to roll it back to the last version. This is useful when things don't go according to plan. Rolling back is simple you basically point out to the deployment and use the ```rollout``` command with the ```undo``` parameter.
 
 ```
 $ kubectl rollout undo deployment/voting-app-front
