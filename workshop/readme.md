@@ -288,13 +288,15 @@ spec:
 ```
 ### Packaging voting-app as a container
 
-You are now going to package voting-app as a container container image. This is a simple webapp so Dockerfile is very basic as shown below. Basically are using flask base image and then install redis pacakge. Finally, we copy the code files residing inside the ```voting-app``` directory to the ```app``` directory inside the container image (it will be created automatically if not exists alredy).
+We start by packaging voting-app as a container container image. This is a simple webapp so Dockerfile is very basic as shown below. Basically are using flask base image and then install redis pacakge. Finally, we copy the code files residing inside the ```voting-app``` directory to the ```app``` directory inside the container image (it will be created automatically if not exists alredy).
 
 ````
 FROM tiangolo/uwsgi-nginx-flask:python3.6
 RUN pip install redis
 ADD /voting-app /app
 ````
+
+Now, build the container image:
 
 ```
 $ docker build -t voting-webapp:1.0 -f Dockerfile.voting-app .
@@ -312,10 +314,15 @@ Successfully built 626972034c28
 Successfully tagged voting-webapp:1.0
 ```
 
-> Since minikube is running inside a virtual machine it's really handy to reuse the Docker daemon inside that virtual machine; as this means you don't have to build on your host machine and push the image into a docker registry. All you need to do is run the command ```eval $(minikube docker-env)```. More details [here](https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon)
+> IMPORTTANT: Since minikube is running inside a virtual machine it's really handy to reuse the Docker daemon inside that virtual machine; as this means you don't have to build on your host machine and push the image into a docker registry. All you need to do is run the command ```eval $(minikube docker-env)```. More details [here](https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon)
 
+That's it as far as building the container images for our voting app goes. Backend is just a redis cache and Docker Hub already has an [offfical Redis image](https://hub.docker.com/_/redis) for that. 
 
-We start with the backend. Redis is used to store the of the voting.
+#### Deploying Kubernetes Artifacts 
+
+We start with the backend. Simply because redis is used to store the of the voting results and without it voting web app won't work.
+
+The ```apply``` command is used to tell kubernetes to create new deployment object as define inside ```voting-app-back-dep.yaml ```.  T
 
 ```
 $ kubectl apply -f voting-app-back-dep.yaml 
@@ -333,7 +340,7 @@ voting-app-backend-f77bd6f4-f5gkd   1/1     Running   0          93s
 
 ```
 
-Next, let us create the service so front-end web app can access the backend (we will deploy it soon). Remember database and webapp are running in two different pods and need to communicate via service endpoint. 
+Next, let us create the service so front-end web app can access the backend. Remember redis and webapp are running in two different pods and need to communicate via service endpoint. 
 
 ```
 $ kubectl apply -f voting-app-back-svc.yaml 
@@ -370,34 +377,34 @@ NAME           TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 voting-front   NodePort   10.102.202.223   <none>        80:32636/TCP   10s
 ```
 
+### Testing the voting app
+
+You need to get the endpoint URL to access the voting app. This is exposed by the voting-front service. The easist way to get to it is by using ```minikube service``` command: 
+
 ```
 $ minikube service voting-front --url
 http://192.168.99.102:32636
 ```
+Open the browser and navigate to the URL. You should see the UI as shown below. Voting app is now functional! 
+
 ![voting-app](./images/voting-app-1.png) 
 
-```
-kubectl get all -l env=dev
-NAME                                    READY   STATUS    RESTARTS   AGE
-pod/voting-app-backend-f77bd6f4-24757   1/1     Running   0          2m20s
-pod/voting-app-front-596476c4c6-k4qlj   1/1     Running   0          2m20s
-
-NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/voting-app-backend   1/1     1            1           2m20s
-deployment.apps/voting-app-front     1/1     1            1           2m20s
-
-NAME                                          DESIRED   CURRENT   READY   AGE
-replicaset.apps/voting-app-backend-f77bd6f4   1         1         1       2m20s
-replicaset.apps/voting-app-front-596476c4c6   1         1         1       2m20s
-```
-
-## Scaling the deloyment
+## Scaling Deloyment
 
 > Approximate time to complete this task is 5 minutes
+
+Currently we have only one pod running our webapp. In case there is more traffic comming in you may want to run mulitple pods. This is done by scaling the deployment to run more pods. Kubernetes uses the concept of [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset) to provide guarantee to always run minimun number of Pod. This is essentially the reson why you have single pod at the moment. If you open the ```voting-app-front-dep.yaml``` you will notice the entry  ```replicas:1```. This tell kubernetes to always run one pod. If for some reason pod goes down Kuberentes will run a new pod to bring the repilica count to 1. 
+
+Scaling to muliptle replicas can be done using ```kubectl scale``` command. ```---replicas``` swtich defines how many pods you like to run. Run the command to increase the replica count for voting-front app to 2 and then see view pods. You can also scale back to one pods as/when by running the command again with ```replicas=1```.
+
 ```
 $ kubectl scale --replicas=2 deployment/voting-app-front
+deployment.extensions/voting-app-front scaled
 
 $ kubectl get po -l type=webapp 
+NAME                                READY   STATUS    RESTARTS   AGE
+voting-app-front-5f869574b7-lk6mr   1/1     Running   0          35h
+voting-app-front-5f869574b7-wk8rl   1/1     Running   0          20s
 ```
 
 ## Rolling updates
