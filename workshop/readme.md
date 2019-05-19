@@ -83,7 +83,7 @@ Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCom
 
 You can take minikube to a test drive right away to make sure things are working as expected! Let us run a nginx server inside Kubernetes cluster.
 
-> Note: Don't worry too much about Kubernetes objects like Pods, Deployment and Service. You will learn more about them in the next excercise when run a custom application.
+> Note: Don't worry too much about Kubernetes objects like Pods, Deployment and Service. You will learn more about them in the next section when build and run a custom application.
 
 ```
 $ kubectl run ngx --image=nginx --labels="type=webserver" 
@@ -158,7 +158,7 @@ Commercial support is available at
 
 Alright, we got a webserver running but you may be wondering shouldn't there be a declarative way to define Pod, Deployment and Service? Perhaps using YAML or JSON format. That is a valid point and typically declarative style works better in most cases. It also aligns well with the "Infrastrucre as a Code" theme that is common in the DevOps community. For the rest of the lab you will be using YAML files to create Pods, Deployments, Services etc. You can learn more about the trade offs between imperative and declrative methods while working with Kubernetes objects [here](https://kubernetes.io/docs/concepts/overview/object-management-kubectl/imperative-command/#trade-offs)
 
-To view to the YAML/JSON definition of the Kubernetes objects created in previous steps you can use -o (output) swtich and get the definition of a particular object in YAML or in JSON format.
+To view to the YAML/JSON definition of the Kubernetes objects created in the previous steps you can use ```-o``` (output) swtich and get the definition of a particular object in ```YAML``` or in ```JSON``` format.
 
 For example get the definition of deployment in YAML
 ```
@@ -181,7 +181,7 @@ metadata:
 .....(Output truncated for brevity)
 ```
 
-## Build, Package, Deploy and Run a multi-container application with Kubernetes
+## Build, Package, Deploy and Run a Multi-Container Application Using Kubernetes
 
 > Approximate time to complete this task is 30 minutes
 
@@ -318,7 +318,8 @@ spec:
     type: database
     env: dev
 ```
-### Packaging voting-app as a container
+
+#### Packaging Voting Application
 
 We start by packaging voting-app as a container container image. This is a simple webapp so Dockerfile is very basic as shown below. Basically are using flask base image and then install redis pacakge. Finally, we copy the code files residing inside the ```voting-app``` directory to the ```app``` directory inside the container image (it will be created automatically if not exists alredy).
 
@@ -350,7 +351,7 @@ Successfully tagged voting-webapp:1.0
 
 That's it as far as building the container images for our voting app goes. Backend is just a redis cache and Docker Hub already has an [offfical Redis image](https://hub.docker.com/_/redis) for that. 
 
-#### Deploying Kubernetes Artifacts 
+#### Deploying Voting Application
 
 We start with the backend. Simply because redis is used to store the of the voting results and without it voting web app won't work.
 
@@ -409,7 +410,7 @@ NAME           TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 voting-front   NodePort   10.102.202.223   <none>        80:32636/TCP   10s
 ```
 
-#### Testing the voting app
+#### Testing Voting Application
 
 You need to get the endpoint URL to access the voting app. This is exposed by the voting-front service. The easist way to get to it is by using ```minikube service``` command: 
 
@@ -421,7 +422,7 @@ Open the browser and navigate to the URL. You should see the UI as shown below. 
 
 ![voting-app](./images/voting-app-1.png) 
 
-## Scaling Deloyment
+## Scaling Deployment
 
 > Approximate time to complete this task is 5 minutes
 
@@ -439,7 +440,7 @@ voting-app-front-5f869574b7-lk6mr   1/1     Running   0          35h
 voting-app-front-5f869574b7-wk8rl   1/1     Running   0          20s
 ```
 
-## Rolling updates
+## Perfrom Rolling Updates and Rollback to Voting Application
 
 > Approximate time to complete this task is 10 minutes
 
@@ -519,16 +520,17 @@ Although the deployed worked out fine we are now going to roll it back to the la
 $ kubectl rollout undo deployment/voting-app-front
 ```
 
-
-## Visualize performance monitoring using Grafana and Kubernetes Dashboard 
+## Performance Monitoring & Visualization Using Grafana and Kubernetes Dashboard 
 
 > Approximate time to complete this task is 10 minutes
 
 ### Grafana
 
-To view the performace monitoring metrics in Kubernetes Grafana provides a popular visualization dashboard. This is done by enabling Heapster addon which provides multi-level monitoring and performance analysis including pods, nodes, and cluster.
+To view the performace monitoring metrics in Kubernetes, Grafana provides a popular visualization dashboard. This is done by enabling Heapster addon which provides multi-level monitoring and performance analysis including pods, nodes, and cluster. Behind the scenes, it leverages InfluxDB as the storage backend for metric data and Grafana as visualization UI.
 
-Behind the scenes, it leverages InfluxDB as the storage backend for metric data and Grafana as visualization UI.
+> Note: Minikube has a set of built in addons that can be used enabled, disabled, and opened inside of the local Kubernetes environment. They provide a convenient way to enable or disable features in your Kubernetes envrioment. You can find more details about addons [here](https://github.com/kubernetes/minikube/blob/master/docs/addons.md) 
+
+You start by enabling an heapster addon:
 
 ```
 $ minikube addons enable heapster
