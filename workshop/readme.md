@@ -235,9 +235,67 @@ spec:
     env: dev
 ```
 
-
+#### Voting Application | Backend 
+The backend deployment defines a pod that runs a redis cache. It has labels ```type: database``` and ``` env: dev``` assigned to it.  
 
 ![voting-app-arch-1](./images/voting-app-arch-2.png)
+
+You can review the contents of ```voting-app-back-dep.yaml ``` to get a sense of how pod, container, labels and relicas are defined inside a deployment definition. Below is the summary of most releveant parts:
+
+| Type   |      Value      |  Details |
+|----------|:-------------:|------:|
+| name  | voting-app-backend |  Name of the pod|
+| labels |    env: dev , env: database   |   Labels associated with the pod|
+| containers | image: redis |   Container image redis (available from Docker Hub) |
+| containers | name: backend | Mame of the container|
+
+```
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name:  voting-app-backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        type: database 
+        env: dev
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: backend
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+```
+
+We also have ```voting-app-back-svc.yaml ``` that defines the service to expose the redis cache. It is needed because voting front end webapp is running in a different pod and won't able to access it otherwise. Also note that unlike the front end service it does expose the service to Kubernetes Node. The reason is simple - we are not expecting anyone outside voting front end webapp to connect to it!  
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-backend
+spec:
+  ports:
+  - port: 6379
+  selector:
+    type: database
+    env: dev
+```
+### Packaging voting-app as a container
+
+You are now going to package voting-app as a container container image. This is a simple webapp so Dockerfile is very basic as shown below. Basically are using flask base image and then install redis pacakge. Finally, we copy the code files residing inside the ```voting-app``` directory to the ```app``` directory inside the container image (it will be created automatically if not exists alredy).
+
+````
+FROM tiangolo/uwsgi-nginx-flask:python3.6
+RUN pip install redis
+ADD /voting-app /app
+````
+
 ```
 $ docker build -t voting-webapp:1.0 -f Dockerfile.voting-app .
 
