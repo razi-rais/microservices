@@ -356,7 +356,7 @@ That's it as far as building the container images for our voting app goes. Backe
 
 We start with the backend. Simply because redis is used to store the voting results and without it voting web app won't work as expected.
 
-The ```apply``` command is used to tell kubernetes to create new deployment object as define inside ```voting-app-back-dep.yaml ```. 
+The ```kubectl apply``` command is used to tell kubernetes to create a new deployment object as define in the ```voting-app-back-dep.yaml ``` file. 
 
 ```
 $ kubectl apply -f voting-app-back-dep.yaml 
@@ -403,6 +403,8 @@ NAME                                READY   STATUS    RESTARTS   AGE
 voting-app-front-596476c4c6-6nqfj   1/1     Running   0          6m15s
 ```
 
+Finally, deploy the voting front web app service.
+
 ```
 $ kubectl apply -f voting-app-front-svc.yaml 
 
@@ -419,7 +421,7 @@ You need to get the endpoint URL to access the voting app. This is exposed by th
 $ minikube service voting-front --url
 http://192.168.99.102:32636
 ```
-Open the browser and navigate to the URL. You should see the UI as shown below. Voting app is now functional! 
+Open the browser and navigate to the URL. You should see the UI as shown below. Voting app is now up and running! Go vote. 
 
 ![voting-app](./images/voting-app-1.png) 
 
@@ -427,9 +429,9 @@ Open the browser and navigate to the URL. You should see the UI as shown below. 
 
 > Approximate time to complete this task is 5 minutes
 
-Currently we have only one pod running our webapp. In case there is more traffic comming in you may want to run mulitple pods. This is done by scaling the deployment to run more pods. Kubernetes uses the concept of [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset) to provide guarantee to always run minimun number of Pod. This is essentially the reson why you have single pod at the moment. If you open the ```voting-app-front-dep.yaml``` you will notice the entry  ```replicas:1```. This tell kubernetes to always run one pod. If for some reason pod goes down Kuberentes will run a new pod to bring the repilica count to 1. 
+Currently, we only have a single pod running webapp container. In case there is more traffic comming in you may want to run mulitple pods to handle that traffic. This is done by scaling the deployment to run more pods. Kubernetes uses the concept of [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset) to provide guarantee to always run minimun number of Pods. This is essentially the reson why you have single pod at the moment. If you open the ```voting-app-front-dep.yaml``` you will notice the entry  ```replicas:1```. This tell kubernetes to always run a single pod. If for some reason pod goes down Kuberentes will run a new pod to bring the replica count to 1. 
 
-Scaling to muliptle replicas can be done using ```kubectl scale``` command. ```---replicas``` swtich defines how many pods you like to run. Run the command to increase the replica count for voting-front app to 2 and then see view pods. You can also scale back to one pods as/when by running the command again with ```replicas=1```.
+Scaling to muliptle replicas can be done using ```kubectl scale``` command. ```---replicas``` swtich defines how many pods you like to run. Run the command to increase the replica count for the voting-front app to 2. You can also scale back to one pods as/if needed by running the command again with ```replicas=1```.
 
 ```
 $ kubectl scale --replicas=2 deployment/voting-app-front
