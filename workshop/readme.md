@@ -322,7 +322,7 @@ That's it as far as building the container images for our voting app goes. Backe
 
 We start with the backend. Simply because redis is used to store the of the voting results and without it voting web app won't work.
 
-The ```apply``` command is used to tell kubernetes to create new deployment object as define inside ```voting-app-back-dep.yaml ```.  T
+The ```apply``` command is used to tell kubernetes to create new deployment object as define inside ```voting-app-back-dep.yaml ```. 
 
 ```
 $ kubectl apply -f voting-app-back-dep.yaml 
@@ -377,7 +377,7 @@ NAME           TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 voting-front   NodePort   10.102.202.223   <none>        80:32636/TCP   10s
 ```
 
-### Testing the voting app
+#### Testing the voting app
 
 You need to get the endpoint URL to access the voting app. This is exposed by the voting-front service. The easist way to get to it is by using ```minikube service``` command: 
 
@@ -411,7 +411,9 @@ voting-app-front-5f869574b7-wk8rl   1/1     Running   0          20s
 
 > Approximate time to complete this task is 10 minutes
 
-Change the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
+Let's make a minor change to the voting front web app and see how we can deploy the application again without downtime!
+
+Beging by change the title of the webapp from "Awesome Voting App" to "Awesome Voting App v2" by editing file ```config_file.cfg``` located inside ```/voting-app``` directory
 
 **Before | config_file.cfg**
 ```
@@ -431,17 +433,62 @@ VOTE2VALUE = 'Dogs'
 SHOWHOST = 'false'
 ```
 
+Currently we are running ```1.0``` version of the web app as reflected by the tag field of the container image ```voting-webapp:1.0```. After the updates you build the container again with an updated tag ```voting-webapp:2.0```.
+
 ```
 $ eval $(minikube docker-env)
 
 $ docker build -t voting-webapp:2.0 -f Dockerfile.voting-app .
+```
 
+You have the new webapp container image ready. The ```voting-app-front-v2-dep.yaml``` is a new deployment file which is identical to the one that is currently deployed except that it has an image field set to the new container image ```image: voting-webapp:2.0```. 
+
+```
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: voting-app-front
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        env: dev
+        type: webapp
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: webfront
+        image: voting-webapp:2.0
+.......(Output truncated for brevity)
+```
+
+Also, its important to highlight the ```strategy``` section in the deployment file. Basically the ```rollingUpdate``` is a type of update stragey which specify ```maxUnavailable``` and ```maxSurge``` to control the rolling update process. The  ```maxUnavailable``` specifies the maximum number of Pods that can be unavailable during the update process and it is set to ```1``` meaning only single pod can be down at any point in time during the update process. Also, ```maxSurge``` specifies the maximum number of Pods that can be created over the desired number of Pods and currently it is set to ```1``` which means only one Pod will be added at a time. In a nutshell with this definition we always have at least one pod running making sure in comming traffic don't get disrupted. 
+
+ . You can learn more about other stragies [here](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
+
+Its time to go head and perfrom the rolling update!
+
+```
 $ kubectl apply -f voting-app-front-v2-dep.yaml 
+```
 
+Refresh the voting web app and you should see the updates in action.
+
+![voting-app](./images/voting-app-2.png) 
+
+Although the deployed worked out fine we are now going to roll it back to the last version. This is useful when things don't go according to plan. Rolling back is simple you basically point out to the deployment and use the ```rollout``` command with the ```undo`` parameter.
+
+```
 $ kubectl rollout undo deployment/voting-app-front
 ```
 
-![voting-app](./images/voting-app-2.png) 
 
 ## Visualize performance monitoring using Grafana and Kubernetes Dashboard 
 
