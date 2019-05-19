@@ -322,7 +322,7 @@ spec:
 
 #### Packaging Voting Application
 
-We start by packaging voting-app as a container container image. This is a simple webapp so Dockerfile is very basic as shown below. Basically are using flask base image and then install redis pacakge. Finally, we copy the code files residing inside the ```voting-app``` directory to the ```app``` directory inside the container image (it will be created automatically if not exists alredy).
+You start by packaging voting web application as a container image. This is a simple webapp so Dockerfile is very basic as shown below. Dockerfile is using flask base image and then installs a redis python pacakge. Finally, we copy the code files residing inside the ```voting-app``` directory to the ```app``` directory inside the container image (it will be created automatically if not exists already).
 
 ````
 FROM tiangolo/uwsgi-nginx-flask:python3.6
@@ -330,7 +330,7 @@ RUN pip install redis
 ADD /voting-app /app
 ````
 
-Now, build the container image:
+Next, build the container image:
 
 ```
 $ docker build -t voting-webapp:1.0 -f Dockerfile.voting-app .
@@ -350,11 +350,11 @@ Successfully tagged voting-webapp:1.0
 
 > IMPORTTANT: Since minikube is running inside a virtual machine it's really handy to reuse the Docker daemon inside that virtual machine; as this means you don't have to build on your host machine and push the image into a docker registry. All you need to do is run the command ```eval $(minikube docker-env)```. More details [here](https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon)
 
-That's it as far as building the container images for our voting app goes. Backend is just a redis cache and Docker Hub already has an [offfical Redis image](https://hub.docker.com/_/redis) for that. 
+That's it as far as building the container images for our voting app goes. Backend is just a redis cache and Docker Hub already has an [offfical Redis image](https://hub.docker.com/_/redis) for that so no need to build any more images.
 
 #### Deploying Voting Application
 
-We start with the backend. Simply because redis is used to store the of the voting results and without it voting web app won't work.
+We start with the backend. Simply because redis is used to store the voting results and without it voting web app won't work as expected.
 
 The ```apply``` command is used to tell kubernetes to create new deployment object as define inside ```voting-app-back-dep.yaml ```. 
 
