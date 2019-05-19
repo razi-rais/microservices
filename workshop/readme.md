@@ -429,9 +429,9 @@ Open the browser and navigate to the URL. You should see the UI as shown below. 
 
 > Approximate time to complete this task is 5 minutes
 
-Currently, we only have a single pod running webapp container. In case there is more traffic comming in you may want to run mulitple pods to handle that traffic. This is done by scaling the deployment to run more pods. Kubernetes uses the concept of [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset) to provide guarantee to always run minimun number of Pods. This is essentially the reson why you have single pod at the moment. If you open the ```voting-app-front-dep.yaml``` you will notice the entry  ```replicas:1```. This tell kubernetes to always run a single pod. If for some reason pod goes down Kuberentes will run a new pod to bring the replica count to 1. 
+Currently, we only have a single pod running webapp container. In case there is more traffic comming in you may want to run mulitple pods to handle that traffic. This is done by scaling the deployment to run more pods. Kubernetes uses the concept of [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset) to provide guarantee to always run minimun number of Pods. This is essentially the reson why you have single pod at the moment. If you open the ```voting-app-front-dep.yaml``` you will notice the entry  ```replicas:1```. This tell kubernetes to always run a single pod. If for some reason pod goes down Kuberentes will run a new pod to bring the replica count to ```1```. 
 
-Scaling to muliptle replicas can be done using ```kubectl scale``` command. ```---replicas``` swtich defines how many pods you like to run. Run the command to increase the replica count for the voting-front app to 2. You can also scale back to one pods as/if needed by running the command again with ```replicas=1```.
+Scaling to muliptle replicas can be done using ```kubectl scale``` command. ```---replicas``` swtich defines how many pods you like to run. Run the command to increase the replica count for the voting-front app to ```2```. You can also scale back to one pods as/if needed by running the command again with ```replicas=1```.
 
 ```
 $ kubectl scale --replicas=2 deployment/voting-app-front
