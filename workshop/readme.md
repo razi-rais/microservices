@@ -166,18 +166,22 @@ Let's focus on the Kubernetes artifacts and view them conceptually as they fit i
 
 #### Voting Application | Front End WebApp
 
-Right at the center you have a WebApp (packaged and running as a container). This is the python webapp that you will package as a Docker container shortly. The container itself resides in a pod. Pod is a basic object iniside Kubernetes and unlike Docker you cannot run container without having a pod. Pod also allows you to add  miscellaneous pieces of information like labels to it. Label helps you to tag information to a pod in a key/value format. We have labels ```type: webapp``` and ```env: dev``` assigned to the pod. Pods are usually defined inside a ```Deployment``` to get the benefit of rolling updates and ensuring you always have certain number of pods running in the cluster to get high availablity. Kubernetes use a concept of replica-set to ensure minium number of pods are always running. 
+Let's look at the bigger picture. Here is the story its tells --
+
+ *End user sends a request to http://127.0.0.1:21516 endpoint to access the voting web app. Kubernetes voting service is running on a local minikube Kubernetes cluster that is listening to that endpoint. It acknowledge the request and check if any pod has labels that matches "type:webapp, env: dev" and if there are it route the request to that pod at port 80. Pod takes the request and route it to a container which is running application on port 80 and send the reponse back*
 
 ![voting-app-arch-1](./images/voting-app-arch-1.png)
 
-You can review the contents of ```voting-app-front-dep.yaml ``` to get a sense of how pod, container, labels and relicas are defined inside a deployment definition. Below is the summary of most releveant parts:\
+Right at the center you have a WebApp (packaged and running as a container). This is the python webapp that you will package as a Docker container shortly. The container itself resides in a pod. Pod is a basic object iniside Kubernetes and unlike Docker you cannot run container without having a pod. Pod also allows you to add  miscellaneous pieces of information like labels to it. Label helps you to tag information to a pod in a key/value format. We have labels ```type: webapp``` and ```env: dev``` assigned to the pod. Pods are usually defined inside a ```Deployment``` to get the benefit of rolling updates and ensuring you always have certain number of pods running in the cluster to get high availablity. Kubernetes use a concept of replica-set to ensure minium number of pods are always running. 
+
+You can review the contents of ```voting-app-front-dep.yaml ``` to get a sense of how pod, container, labels and relicas are defined inside a deployment definition. Below is the summary of most releveant parts:
 
 | Type   |      Value      |  Details |
 |----------|:-------------:|------:|
 | name  | voting-app-front |  Name of the pod|
 | labels |    env: dev , env: webapp   |   Labels associated with the pod|
 | containers | image: voting-webapp:1.0 |   Container image name to run |
-| containers | name: webfront | name of a container|
+| containers | name: webfront | Mame of the container|
 
 ```
 apiVersion: apps/v1beta1
@@ -230,6 +234,8 @@ spec:
     type: webapp
     env: dev
 ```
+
+
 
 ![voting-app-arch-1](./images/voting-app-arch-2.png)
 ```
