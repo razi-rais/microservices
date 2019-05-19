@@ -9,8 +9,6 @@ This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 ## Prerequisites 
 > Approximate time to complete this task is 20 minutes
 
-In this training we will use [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) to run a local Kubernetes cluster. We will access this local Kubernetes cluster with the client tool  `kubectl`.
-
  * Clone the repo: 
  ``` git clone  https://github.com/razi-rais/microservices.git && cd microservices/workshop  ```
 
@@ -41,6 +39,9 @@ Server: Docker Engine - Community
   Experimental:     false
 
 ```
+
+In this training we will use [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) to run a local Kubernetes cluster. We will access this local Kubernetes cluster with the client tool  `kubectl`.
+
 * Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety of operating systems)
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (This link contains step by step insructions to setup Minikube on variety of operating systems)
