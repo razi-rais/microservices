@@ -14,9 +14,9 @@ In this training we will use [minikube](https://kubernetes.io/docs/getting-start
  * Clone the repo: 
  ``` git clone  https://github.com/razi-rais/microservices.git && cd microservices/workshop  ```
 
-> NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. Recommendation to use [virtualbox](https://www.virtualbox.org) as a hypervisor. 
+> NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. Recommendation is to use [virtualbox](https://www.virtualbox.org) as a hypervisor. 
 
-* Install Docker (Stable Version).  [Mac](https://docs.docker.com/docker-for-mac/install/) |[Linux](https://docs.docker.com/install/) | [Windows](https://docs.docker.com/docker-for-windows/install/)
+* Install Docker (Stable Version) | [Mac](https://docs.docker.com/docker-for-mac/install/) | [Linux](https://docs.docker.com/install/) | [Windows](https://docs.docker.com/docker-for-windows/install/)
 
 Verfiy the Docker installation:
 ```
@@ -41,7 +41,7 @@ Server: Docker Engine - Community
   Experimental:     false
 
 ```
-* Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety of operating system)
+* Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety of operating systems)
 
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (This link contains step by step insructions to setup Minikube on variety of operating systems)
 
@@ -52,7 +52,7 @@ $ minikube version
 minikube version: v1.0.1
 ```
 
-Now, start the minikube. Please note that ```--vm-driver``` parameter is dependent on the type of hypervisor used during the minikube setup. Following example is using virtualbox as a hypervisor but you may need to change the value depending on your choice of the hypervisor.
+Now, start the minikube. Please note that ```--vm-driver``` parameter is dependent on the type of hypervisor used during the minikube setup. Following example is using virtualbox as a hypervisor but you may need to change the value depending on your choice of the hypervisor as describe [here](https://kubernetes.io/docs/setup/minikube/#installation)
 
 ```
 $ minikube minikube start --vm-driver=virtualbox
@@ -81,7 +81,9 @@ Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCom
 Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:02:58Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-You can take minikube to a test drive right away to make sure things are working as expected! Let us run a nginx server in a kubernetes way.
+You can take minikube to a test drive right away to make sure things are working as expected! Let us run a nginx server inside Kubernetes cluster.
+
+> Note: Don't worry too much about Kubernetes objects like Pods, Deployment and Service. You will learn more about them in the next excercise when run a custom application.
 
 ```
 $ kubectl run ngx --image=nginx --labels="type=webserver" 
@@ -154,7 +156,7 @@ Commercial support is available at
 </html>
 ```
 
-Alright, that was good but you may be wondering shouldn't there be a declarative way to define Pod, Deployment and Service? Perhaps using YAML or JSON format. That is a valid point and typically declarative style works better in most cases. It also aligns well with the "Infrastrucre as a Code" theme that is common in the DevOps community. For the reminder of the labs you will be using YAML files to create Pods, Deployments, Services etc. You can learn more about the trade offs between imperative and declrative methods while working with Kubernetes objects [here](https://kubernetes.io/docs/concepts/overview/object-management-kubectl/imperative-command/#trade-offs)
+Alright, we got a webserver running but you may be wondering shouldn't there be a declarative way to define Pod, Deployment and Service? Perhaps using YAML or JSON format. That is a valid point and typically declarative style works better in most cases. It also aligns well with the "Infrastrucre as a Code" theme that is common in the DevOps community. For the rest of the lab you will be using YAML files to create Pods, Deployments, Services etc. You can learn more about the trade offs between imperative and declrative methods while working with Kubernetes objects [here](https://kubernetes.io/docs/concepts/overview/object-management-kubectl/imperative-command/#trade-offs)
 
 To view to the YAML/JSON definition of the Kubernetes objects created in previous steps you can use -o (output) swtich and get the definition of a particular object in YAML or in JSON format.
 
