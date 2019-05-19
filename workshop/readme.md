@@ -185,9 +185,10 @@ metadata:
 
 > Approximate time to complete this task is 30 minutes
 
-In this section you will build, package, deploy and run a multi-container application to a minikube Kubernetes locally. Later, you will learn how scale and perform rolling update to it using Kubernetes. 
+In this section you will build, package, deploy and run a multi-container application on a minikube Kubernetes locally. Later, you will learn how to scale and perform rolling updates to it. 
 
-Let's review the application. Its a simple python web application that provides you with an option to vote for your favorite animal (cats or dogs). The voting results are store in a Redis cache. 
+ 
+The voting application is a simple python web application that provides you with an option to vote for your favorite animal (cats or dogs). The voting results are store in a Redis cache which also acts as a backend.
 
 The UI is shown below:
 ![voting-app](./images/voting-app-1.png) 
