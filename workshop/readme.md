@@ -303,7 +303,6 @@ To view the performace monitoring metrics in Kubernetes Grafana provides a popul
 
 Behind the scenes, it leverages InfluxDB as the storage backend for metric data and Grafana as visualization UI.
 
-
 ```
 $ minikube addons enable heapster
 ✅  heapster was successfully enabled
