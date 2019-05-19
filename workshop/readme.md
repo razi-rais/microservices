@@ -4,15 +4,45 @@
 This repository contains setup instructions and hands-on labs for the [Kubernetes Workshop](https://www.eventbrite.com/e/building-microservices-using-kubernetes-hands-on-workshop-online-attendence-option-available-tickets-61595687359).
 This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 
+**In order to perfrom tasks in this workshop you're expected to have a working knowledge of Linux command line and basic understanding of Docker containers.**
+
 ## Prerequisites 
-> Approximate time to complete this task is 15 minutes
+> Approximate time to complete this task is 20 minutes
 
 In this training we will use [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) to run a local Kubernetes cluster. We will access this local Kubernetes cluster with the client tool  `kubectl`.
 
-> NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. It is reocmmended to use virtualbox as a hypervisor if possible. 
+ * Clone the repo: 
+ ``` git clone  https://github.com/razi-rais/microservices.git && cd microservices/workshop  ```
 
-* Clone the repo:  ``` git clone  https://github.com/razi-rais/microservices.git && cd microservices/workshop  ```
+> NOTE: Following software are compatiable with Linux, Mac OS X and Windows operating system. During the minikube setup you will need to install a hypervisor that will run the minikube vm. Recommendation to use [virtualbox](https://www.virtualbox.org) as a hypervisor. 
+
+* Install Docker (Stable Version).  [Mac](https://docs.docker.com/docker-for-mac/install/) |[Linux](https://docs.docker.com/install/) | [Windows](https://docs.docker.com/docker-for-windows/install/)
+
+Verfiy the Docker installation:
+```
+$ docker version
+Client: Docker Engine - Community
+ Version:           18.09.2
+ API version:       1.39
+ Go version:        go1.10.8
+ Git commit:        6247962
+ Built:             Sun Feb 10 04:12:39 2019
+ OS/Arch:           darwin/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          18.09.2
+  API version:      1.39 (minimum version 1.12)
+  Go version:       go1.10.6
+  Git commit:       6247962
+  Built:            Sun Feb 10 04:13:06 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+
+```
 * Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube) (This link contains step by step insructions to setup Minikube on variety of operating system)
+
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (This link contains step by step insructions to setup Minikube on variety of operating systems)
 
 
