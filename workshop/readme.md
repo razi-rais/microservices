@@ -168,7 +168,7 @@ Let's focus on the Kubernetes artifacts and view them conceptually as they fit i
 
 Let's look at the bigger picture. Here is the story its tells --
 
- *End user sends a request to http://127.0.0.1:21516 endpoint to access the voting web app. Kubernetes voting service is running on a local minikube Kubernetes cluster that is listening to that endpoint. It acknowledge the request and check if any pod has labels that matches "type:webapp, env: dev" and if there are it route the request to that pod at port 80. Pod takes the request and route it to a container which is running application on port 80 and send the reponse back*
+ *End user sends a request to http://127.0.0.1:21516 endpoint to access the voting web app. Kubernetes voting service is running on a local minikube Kubernetes cluster that is listening to that endpoint. It acknowledge the request and check if any pod has labels that matches "type:webapp, env: dev" and if there are it route the request to that pod at port 80. Pod takes the request and route it to a container which is running application on port 80. Web app process the request and send the reponse back.*
 
 ![voting-app-arch-1](./images/voting-app-arch-1.png)
 
