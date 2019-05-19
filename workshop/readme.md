@@ -293,16 +293,16 @@ $ kubectl rollout undo deployment/voting-app-front
 
 ![voting-app](./images/voting-app-2.png) 
 
-## Performance monitoring using Grafana and Kubernetes Dashboard 
+## Visualize performance monitoring using Grafana and Kubernetes Dashboard 
 
 > Approximate time to complete this task is 10 minutes
 
+### Grafana
 
-For development purpose, I highly recommend enabling heapster add-on. Heapster enables multi-level monitoring and performance analysis including pods, nodes, and cluster.
+To view the performace monitoring metrics in Kubernetes Grafana provides a popular visualization dashboard. This is done by enabling Heapster addon which provides multi-level monitoring and performance analysis including pods, nodes, and cluster.
 
-Under the hood, it is using InfluxDB as the storage backend for metric data and Grafana as visualization UI.
+Behind the scenes, it leverages InfluxDB as the storage backend for metric data and Grafana as visualization UI.
 
-> Approximate time to complete this task is 5 minutes
 
 ```
 $ minikube addons enable heapster
@@ -334,6 +334,38 @@ From the top pane select "Home" and then select "Pods".
 You will be taken to a dashbord displaying various peformance related metrics like individual pod CPU, memory, network and filesystem usage. Change the namespace from ```kube-system``` to ```default``` and then select voting-front-app pod. The dashboard will update automatically to reflect the values related to the pod. 
 
 ![grafana](./images/grafana-3.png) 
+
+### Kubernetes Dashboard
+
+```
+$ minikube addons enable dashboard
+✅  dashboard was successfully enabled
+```
+
+You can open the Kubernetes dashboard by running a simple command:
+```
+$ minikube addons open dashboard
+```
+![k8s-dashboard](./images/k8s-dashboard-1.png) 
+
+> NOTE: If for some reason you don't see the dasboard opening up in the browser then use```port-forwarding``` command shown below. 
+
+First capture the name of the pod running the dashboard application. 
+
+```
+$ kubectl get po -n kube-system -l "app=kubernetes-dashboard"  
+NAME                                    READY   STATUS    RESTARTS   AGE
+kubernetes-dashboard-79dd6bfc48-4c527   1/1     Running   4          8d
+```
+Now start port-forwarding traffice to that pod.
+
+```
+$ kubectl port-forward kubernetes-dashboard-79dd6bfc48-4c527 -n kube-system 9090:9090
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+```
+Open the browser and navigate to ```http://127.0.0.1:9090``` to access the dashboard.
+
 
 ## Explore Logs using EFK (Elasticsearch, Fluentd, Kibana)
 
