@@ -16,7 +16,7 @@ This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 
 * Install Docker (Stable Version) | [Mac](https://docs.docker.com/docker-for-mac/install/) | [Linux](https://docs.docker.com/install/) | [Windows](https://docs.docker.com/docker-for-windows/install/)
 
-Verfiy the Docker installation:
+Verify the Docker installation:
 ```
 $ docker version
 Client: Docker Engine - Community
