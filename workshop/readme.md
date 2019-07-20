@@ -1,7 +1,7 @@
 
 # Kubernetes Workshop
 
-This repository contains setup instructions and hands-on labs for the [Kubernetes Workshop](https://www.eventbrite.com/e/building-microservices-using-kubernetes-hands-on-workshop-online-attendence-option-available-tickets-61595687359).
+This repository contains setup instructions and hands-on labs for the [Kubernetes Workshop](https://www.eventbrite.com/e/getting-started-with-kubernetes-workshop-tickets-64154153801).
 This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
 
 **In order to perfrom tasks in this workshop you're expected to have a working knowledge of Linux command line and basic understanding of Docker containers.**
