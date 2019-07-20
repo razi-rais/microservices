@@ -1,8 +1,7 @@
 
 # Kubernetes Workshop
 
-This repository contains setup instructions and hands-on labs for the [Kubernetes Workshop](https://www.eventbrite.com/e/getting-started-with-kubernetes-workshop-tickets-64154153801).
-This workshop is led by [Razi Rais](https://www.linkedin.com/in/razirais)
+This repository contains setup instructions and hands-on labs for the Kubernetes Workshop led by [Razi Rais](https://www.linkedin.com/in/razirais)
 
 **In order to perfrom tasks in this workshop you're expected to have a working knowledge of Linux command line and basic understanding of Docker containers.**
 
@@ -58,7 +57,7 @@ Now, start the minikube. Please note that ```--vm-driver``` parameter is depende
 > It is recommended to set ```--cpus``` switch 4 cpus and memory to 6 gigabytes ```memory=6144``` to make sure that later excercise that uses Elasticsearch works as expected on minikube. If you don't have enough CPU or memory on your machine then drop the parameter to complete other labs.
 
 ```
-$ minikube minikube start --vm-driver=virtualbox --cpus=4 --memory=6144
+$ minikube start --vm-driver=virtualbox --cpus=4 --memory=6144
 
 😄  minikube v1.0.1 on darwin (amd64)
 🤹  Downloading Kubernetes v1.14.1 images in the background ...
